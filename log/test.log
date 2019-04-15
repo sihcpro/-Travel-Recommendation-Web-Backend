@@ -1,0 +1,2 @@
+  [1m[35m (0.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "travel_recommendation_test"[0m
+  [1m[35m (569.2ms)[0m  [1m[35mCREATE DATABASE "travel_recommendation_test" ENCODING = 'unicode'[0m
