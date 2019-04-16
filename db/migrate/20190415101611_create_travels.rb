@@ -9,9 +9,15 @@ class CreateTravels < ActiveRecord::Migration[5.2]
       t.datetime :start_time
       t.datetime :end_time
       t.string :link
+      
+      t.belongs_to :city, :from
+      t.belongs_to :city, :to
 
       t.timestamps
     end
+
+    add_index :cities, :from
+    add_index :cities, :to
   end
 end
 

@@ -5,12 +5,33 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
+
 
 puts 'Created Admin' if User.new(name: "Bang", email: "equal@gmail.com", password: "123456", gender: 0, role: 2).save
 puts 'created Test'  if User.new(name: "Test", email: "test", password: "test").save
 
-require 'csv'
-csv = CSV.read("./db/travel.csv")
-for row in csv
-    puts row
+
+cities = CSV.read("./db/cities.csv")
+print 'Create city: '
+for row in cities
+    city = City.new(name: row[0], rating: 3.0)
+    print '.' if city.save()
 end
+puts ' ok!'
+
+
+travels = CSV.read("./db/travel.csv")
+print 'Create travel: '
+for row in travels
+    travel = Travel.new(website: row[1], title: row[2], price: row[3],
+                        start_pos: row[4], end_pos: row[5],
+                        start_time: row[6], end_time: row[7],
+                        link: row[8])
+    print '.' if travel.save()
+end
+puts ' ok!'
+
+
+# while true
+# end
