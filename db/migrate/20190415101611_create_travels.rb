@@ -4,7 +4,7 @@ class CreateTravels < ActiveRecord::Migration[5.2]
       t.string :title
       t.float :price
       t.float :rating
-      t.datetime :start_time
+      t.string :date
       t.datetime :duration
       t.text :description
 
@@ -18,12 +18,3 @@ class CreateTravels < ActiveRecord::Migration[5.2]
     # add_foreign_key :travels, :cities, column: :to
   end
 end
-
-# 'website',
-# 'name',
-# 'price',
-# 'start_pos',
-# 'end_pos',
-# 'start_time',
-# 'end_time',
-# 'link'

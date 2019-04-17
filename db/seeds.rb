@@ -9,30 +9,54 @@ require 'csv'
 
 
 puts 'Created Admin' if User.new(name: "Bang", email: "equal@gmail.com", password: "123456", gender: 0, role: 2).save
-puts 'created Test'  if User.new(name: "Test", email: "test", password: "test").save
+puts 'created Test'  if User.new(name: "Test", email: "test", password: "123456").save
+puts 'Created User1' if User.new(name: "Test", email: "user1", password: "123456").save
+puts 'Created User2' if User.new(name: "Test", email: "user2", password: "123456").save
+puts 'Default password: 123456'
 
 
 cities = CSV.read("./db/cities.csv")
-print 'Create city: '
+print 'Create cities     : '
 for row in cities
     city = City.new(name: row[0], rating: 3.0)
     print '.' if city.save()
 end
-puts ' ok!'
+puts ' ok'
 
 
-travels = CSV.read("./db/travel.csv")
-print 'Create travel: '
+travels = CSV.read("./db/travels.csv")
+print 'Create travels    : '
 for row in travels
-    travel = Travel.new(title: row[1], price: row[2], rating: row[3],
-                        from: row[4], to: row[5],
-                        start_time: row[6], duration: row[7],
-                        description: row[8]
-                        )
+    travel = Travel.new(title: row[0], price: row[1], rating: row[2],
+                        date: row[3], duration: row[4],
+                        description: row[5])
     print '.' if travel.save()
 end
-puts ' ok!'
+puts ' ok'
 
+starts = CSV.read("./db/starts.csv")
+print 'Create starts     : '
+for row in starts
+    start = Start.new(travel_id: row[0], city_id: row[1])
+    print '.' if start.save()
+end
+puts ' ok'
+
+destination = CSV.read("./db/destinations.csv")
+print 'Create destinations: '
+for row in destination
+    destination = Destination.new(travel_id: row[0], city_id: row[1])
+    print '.' if destination.save()
+end
+puts ' ok'
+
+histories = CSV.read("./db/histories.csv")
+print 'Create histories   : '
+for row in histories
+    history = History.new(user_id: row[0], travel_id: row[1], status: row[2])
+    print '.' if history.save()
+end
+puts ' ok'
 
 # while true
 # end
