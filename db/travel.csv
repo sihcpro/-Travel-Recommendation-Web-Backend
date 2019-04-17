@@ -1,16 +1,2 @@
-id,website,name,price,start_pos,end_pos,start_time,end_time,link
-0,Travel,Đà Nẵng vivu, 7990000, 4.5, Hồ Chí Minh, DN, 2
-1,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-2,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-3,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-4,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-5,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-6,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-7,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-8,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,7290000,,,27/04/2019,,
-9,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
-10,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
-11,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
-12,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
-13,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
-14,Travel,Hải Phòng - Bình Liêu - Chinh Phục Sống ,6990000,,,27/04/2019,,
+id,title,price,rating,from,to,start_time,duration,description,
+0,Đà Nẵng vivu,7990000,4.5,1,2,23/5/2019,5,Các bạn sẽ có một chuyến đi nhớ đời,

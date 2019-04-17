@@ -1,23 +1,21 @@
 class CreateTravels < ActiveRecord::Migration[5.2]
   def change
     create_table :travels do |t|
-      t.string :website
       t.string :title
       t.float :price
-      t.string :start_pos
-      t.string :end_pos
+      t.float :rating
       t.datetime :start_time
-      t.datetime :end_time
-      t.string :link
-      
-      t.belongs_to :city, :from
-      t.belongs_to :city, :to
+      t.datetime :duration
+      t.text :description
+
+      # t.belongs :from
+      # t.integer :to
 
       t.timestamps
     end
 
-    add_index :cities, :from
-    add_index :cities, :to
+    # add_foreign_key :travels, :cities, column: :from
+    # add_foreign_key :travels, :cities, column: :to
   end
 end
 

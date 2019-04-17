@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_101612) do
+ActiveRecord::Schema.define(version: 2019_04_17_012812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
-    t.float "rating"
+    t.float "rating", default: 3.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,15 +27,31 @@ ActiveRecord::Schema.define(version: 2019_04_16_101612) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "destinations", force: :cascade do |t|
+    t.bigint "city_id"
+    t.bigint "travel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_destinations_on_city_id"
+    t.index ["travel_id"], name: "index_destinations_on_travel_id"
+  end
+
+  create_table "starts", force: :cascade do |t|
+    t.bigint "travel_id"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_starts_on_city_id"
+    t.index ["travel_id"], name: "index_starts_on_travel_id"
+  end
+
   create_table "travels", force: :cascade do |t|
-    t.string "website"
     t.string "title"
     t.float "price"
-    t.string "start_pos"
-    t.string "end_pos"
+    t.float "rating"
     t.datetime "start_time"
-    t.datetime "end_time"
-    t.string "link"
+    t.datetime "duration"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

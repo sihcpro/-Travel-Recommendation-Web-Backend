@@ -24,10 +24,11 @@ puts ' ok!'
 travels = CSV.read("./db/travel.csv")
 print 'Create travel: '
 for row in travels
-    travel = Travel.new(website: row[1], title: row[2], price: row[3],
-                        start_pos: row[4], end_pos: row[5],
-                        start_time: row[6], end_time: row[7],
-                        link: row[8])
+    travel = Travel.new(title: row[1], price: row[2], rating: row[3],
+                        from: row[4], to: row[5],
+                        start_time: row[6], duration: row[7],
+                        description: row[8]
+                        )
     print '.' if travel.save()
 end
 puts ' ok!'
