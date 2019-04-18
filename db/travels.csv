@@ -1,9 +1,30 @@
-Đà Nẵng vivu,7990000,4.5,weekday,5,Các bạn sẽ có một chuyến đi nhớ đời,
-Đà Nẵng vivu,8990000,4.5,weekend,5,Các bạn sẽ có một chuyến đi nhớ đời,
-Hà Nội hồ hởi,8990000,4.5,weekday,5,Vui lên đi,
-Hà Nội hồ hởi,13990000,4.5,weekend,5,Vui lên đi,
-Sài Gòn thâu đêm,6990000,4.5,weekday,5,Nhớ ngủ sớm,
-Sài Gòn thâu đêm,16990000,4.5,weekday,5,Nhớ ngủ sớm,
-Đà Lạt mộng mơ,3000000,4.5,weekday,3,Trốn hè
-Đà Lạt mộng mơ,3000000,4.5,weekday,3,Trốn hè
-Đà Lạt mộng mơ,6000000,4.5,weekday,3,Trốn hè
+Đà Nẵng vivu,7990000,4.5,weekday,5,Chuyến đi nhớ đời,Hồ Chí Minh,Đà Nẵng
+Đà Nẵng vivu,10990000,4.5,weekend,5,Chuyến đi nhớ đời,Hồ Chí Minh,Đà Nẵng
+Đà Nẵng vivu,7990000,4.5,weekday,5,Chuyến đi nhớ đời,Hà Nội,Đà Nẵng
+Đà Nẵng vivu,11990000,4.5,weekend,5,Chuyến đi nhớ đời,Hà Nội,Đà Nẵng
+Hà Nội hồ hởi,8990000,4.5,weekday,5,Vui lên đi,Đà Nẵng,Hà Nội
+Hà Nội hồ hởi,13990000,4.5,weekend,5,Vui lên đi,Đà Nẵng,Hà Nội
+Hà Nội hồ hởi,11990000,4.5,weekday,5,Vui lên đi,Hồ Chí Minh,Hà Nội
+Hà Nội hồ hởi,15990000,4.5,weekend,5,Vui lên đi,Hồ Chí Minh,Hà Nội
+Sài Gòn thâu đêm,6990000,4.5,weekday,5,Nhớ ngủ sớm,Đà Nẵng,Hồ Chí Minh
+Sài Gòn thâu đêm,9990000,4.5,weekend,5,Nhớ ngủ sớm,Đà Nẵng,Hồ Chí Minh
+Sài Gòn thâu đêm,9990000,4.5,weekday,5,Nhớ ngủ sớm,Hà Nội,Hồ Chí Minh
+Sài Gòn thâu đêm,13990000,4.5,weekend,5,Nhớ ngủ sớm,Hà Nội,Hồ Chí Minh
+Đà Lạt mộng mơ,4000000,4.5,weekday,3,Trốn hè,Đà Nẵng,Lâm Đồng
+Đà Lạt mộng mơ,4000000,4.5,weekday,3,Trốn hè,Hồ Chí Minh,Lâm Đồng
+Đà Lạt mộng mơ,8000000,4.5,weekday,3,Trốn hè,Hà Nội,Lâm Đồng
+Đà Lạt mộng mơ,6000000,4.5,weekend,3,Trốn hè,Đà Nẵng,Lâm Đồng
+Đà Lạt mộng mơ,6000000,4.5,weekend,3,Trốn hè,Hồ Chí Minh,Lâm Đồng
+Đà Lạt mộng mơ,10000000,4.5,weekend,3,Trốn hè,Hà Nội,Lâm Đồng
+Nha Trang cát vàng,3000000,4.0,weekday,3,Tắm nắng,Đà Nẵng,Khánh Hoà
+Nha Trang cát vàng,3000000,4.0,weekday,3,Tắm nắng,Hồ Chí Minh,Khánh Hoà
+Nha Trang cát vàng,6000000,4.0,weekday,3,Tắm nắng,Hà Nội,Khánh Hoà
+Nha Trang cát vàng,4000000,4.0,weekend,3,Tắm nắng,Đà Nẵng,Khánh Hoà
+Nha Trang cát vàng,5000000,4.0,weekend,3,Tắm nắng,Hồ Chí Minh,Khánh Hoà
+Nha Trang cát vàng,8000000,4.0,weekend,3,Tắm nắng,Hà Nội,Khánh Hoà
+Huế mộng mơ,2000000,3.5,weekday,3,Thăm kinh thành,Đà Nẵng,Thừa thiên-Huế
+Huế mộng mơ,5000000,3.5,weekday,3,Thăm kinh thành,Hồ Chí Minh,Thừa thiên-Huế
+Huế mộng mơ,6000000,3.5,weekday,3,Thăm kinh thành,Hà Nội,Thừa thiên-Huế
+Huế mộng mơ,3000000,3.5,weekend,3,Thăm kinh thành,Đà Nẵng,Thừa thiên-Huế
+Huế mộng mơ,6000000,3.5,weekend,3,Thăm kinh thành,Hồ Chí Minh,Thừa thiên-Huế
+Huế mộng mơ,7000000,3.5,weekend,3,Thăm kinh thành,Hà Nội,Thừa thiên-Huế

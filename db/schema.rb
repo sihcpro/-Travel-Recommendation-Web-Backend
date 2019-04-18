@@ -67,15 +67,17 @@ ActiveRecord::Schema.define(version: 2019_04_17_043811) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "location"
     t.string "auth_token"
     t.integer "gender"
     t.integer "role"
+    t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_users_on_city_id"
   end
 
 end
