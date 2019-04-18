@@ -9,6 +9,12 @@ class HistoriesController < ApplicationController
 
   def save_result(histories)
     File.open('result.csv', "w+") do |f|
+      f.write("\
+userId,itemId,\
+rating,Start,\
+Price,\
+Date,Duration,\
+\n")
       histories.each do |history|
         f.write("\
 #{check(history.user_id)},#{check(history.travel_id)},\

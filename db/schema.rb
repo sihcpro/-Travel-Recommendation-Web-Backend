@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2019_04_17_043811) do
     t.float "price"
     t.float "rating"
     t.string "date"
-    t.datetime "duration"
+    t.integer "duration"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

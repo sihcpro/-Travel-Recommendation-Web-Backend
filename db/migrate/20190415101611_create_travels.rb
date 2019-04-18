@@ -5,7 +5,7 @@ class CreateTravels < ActiveRecord::Migration[5.2]
       t.float :price
       t.float :rating
       t.string :date
-      t.datetime :duration
+      t.integer :duration
       t.text :description
 
       # t.belongs :from
