@@ -18959,3 +18959,1281 @@ Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 1.1ms)
   ↳ db/seeds.rb:57
   [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
   ↳ db/seeds.rb:57
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (8.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (227.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "travel_recommendation_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (878.2ms)[0m  [1m[35mCREATE DATABASE "travel_recommendation_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (52.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (36.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6391766430404054385)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190415095518)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (38.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password" character varying, "location" character varying, "auth_token" character varying, "gender" integer, "role" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190415095518_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190415095518"]]
+  ↳ bin/rails:9
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCities (20190415100724)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (32.0ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "name" character varying, "rating" float DEFAULT 3.0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190415100724_create_cities.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190415100724"]]
+  ↳ bin/rails:9
+  [1m[35m (8.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTravels (20190415101611)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (37.7ms)[0m  [1m[35mCREATE TABLE "travels" ("id" bigserial primary key, "title" character varying, "price" float, "rating" float, "date" character varying, "duration" timestamp, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190415101611_create_travels.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190415101611"]]
+  ↳ bin/rails:9
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateComments (20190416101612)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (15.6ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190416101612_create_comments.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190416101612"]]
+  ↳ bin/rails:9
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateStarts (20190417012643)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (19.3ms)[0m  [1m[35mCREATE TABLE "starts" ("id" bigserial primary key, "travel_id" bigint, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190417012643_create_starts.rb:3
+  [1m[35m (14.7ms)[0m  [1m[35mCREATE  INDEX  "index_starts_on_travel_id" ON "starts"  ("travel_id")[0m
+  ↳ db/migrate/20190417012643_create_starts.rb:3
+  [1m[35m (20.2ms)[0m  [1m[35mCREATE  INDEX  "index_starts_on_city_id" ON "starts"  ("city_id")[0m
+  ↳ db/migrate/20190417012643_create_starts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190417012643"]]
+  ↳ bin/rails:9
+  [1m[35m (11.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDestinations (20190417012812)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (12.1ms)[0m  [1m[35mCREATE TABLE "destinations" ("id" bigserial primary key, "travel_id" bigint, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190417012812_create_destinations.rb:3
+  [1m[35m (15.9ms)[0m  [1m[35mCREATE  INDEX  "index_destinations_on_travel_id" ON "destinations"  ("travel_id")[0m
+  ↳ db/migrate/20190417012812_create_destinations.rb:3
+  [1m[35m (16.0ms)[0m  [1m[35mCREATE  INDEX  "index_destinations_on_city_id" ON "destinations"  ("city_id")[0m
+  ↳ db/migrate/20190417012812_create_destinations.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190417012812"]]
+  ↳ bin/rails:9
+  [1m[35m (7.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateHistories (20190417043811)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (28.0ms)[0m  [1m[35mCREATE TABLE "histories" ("id" bigserial primary key, "user_id" bigint, "travel_id" bigint, "status" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190417043811_create_histories.rb:3
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE  INDEX  "index_histories_on_user_id" ON "histories"  ("user_id")[0m
+  ↳ db/migrate/20190417043811_create_histories.rb:3
+  [1m[35m (15.9ms)[0m  [1m[35mCREATE  INDEX  "index_histories_on_travel_id" ON "histories"  ("travel_id")[0m
+  ↳ db/migrate/20190417043811_create_histories.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190417043811"]]
+  ↳ bin/rails:9
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-04-17 16:31:31.859064"], ["updated_at", "2019-04-17 16:31:31.859064"]]
+  ↳ bin/rails:9
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6391766430404054385)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "gender", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Bang"], ["email", "equal@gmail.com"], ["password", "123456"], ["gender", 0], ["role", 2], ["created_at", "2019-04-17 16:31:37.779282"], ["updated_at", "2019-04-17 16:31:37.779282"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Test"], ["email", "test"], ["password", "123456"], ["created_at", "2019-04-17 16:31:37.784945"], ["updated_at", "2019-04-17 16:31:37.784945"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Test"], ["email", "user1"], ["password", "123456"], ["created_at", "2019-04-17 16:31:37.795002"], ["updated_at", "2019-04-17 16:31:37.795002"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Test"], ["email", "user2"], ["password", "123456"], ["created_at", "2019-04-17 16:31:37.805432"], ["updated_at", "2019-04-17 16:31:37.805432"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hà Nội"], ["created_at", "2019-04-17 16:31:37.831326"], ["updated_at", "2019-04-17 16:31:37.831326"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hồ Chí Minh"], ["created_at", "2019-04-17 16:31:37.841646"], ["updated_at", "2019-04-17 16:31:37.841646"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Đà Nẵng"], ["created_at", "2019-04-17 16:31:37.851772"], ["updated_at", "2019-04-17 16:31:37.851772"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lâm Đồng"], ["created_at", "2019-04-17 16:31:37.856292"], ["updated_at", "2019-04-17 16:31:37.856292"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Thừa thiên-Huế"], ["created_at", "2019-04-17 16:31:37.867679"], ["updated_at", "2019-04-17 16:31:37.867679"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lào Cai"], ["created_at", "2019-04-17 16:31:37.883756"], ["updated_at", "2019-04-17 16:31:37.883756"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Yên Bái"], ["created_at", "2019-04-17 16:31:37.889191"], ["updated_at", "2019-04-17 16:31:37.889191"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (14.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Điện Biên"], ["created_at", "2019-04-17 16:31:37.906486"], ["updated_at", "2019-04-17 16:31:37.906486"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hòa Bình"], ["created_at", "2019-04-17 16:31:37.910793"], ["updated_at", "2019-04-17 16:31:37.910793"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lai Châu"], ["created_at", "2019-04-17 16:31:37.925973"], ["updated_at", "2019-04-17 16:31:37.925973"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sơn La"], ["created_at", "2019-04-17 16:31:37.935283"], ["updated_at", "2019-04-17 16:31:37.935283"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hà Giang"], ["created_at", "2019-04-17 16:31:37.945040"], ["updated_at", "2019-04-17 16:31:37.945040"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Cao Bằng"], ["created_at", "2019-04-17 16:31:37.949576"], ["updated_at", "2019-04-17 16:31:37.949576"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bắc Kạn"], ["created_at", "2019-04-17 16:31:37.960114"], ["updated_at", "2019-04-17 16:31:37.960114"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lạng Sơn"], ["created_at", "2019-04-17 16:31:37.971808"], ["updated_at", "2019-04-17 16:31:37.971808"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tuyên Quang"], ["created_at", "2019-04-17 16:31:37.978442"], ["updated_at", "2019-04-17 16:31:37.978442"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Thái Nguyên"], ["created_at", "2019-04-17 16:31:37.991321"], ["updated_at", "2019-04-17 16:31:37.991321"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Phú Thọ"], ["created_at", "2019-04-17 16:31:38.000351"], ["updated_at", "2019-04-17 16:31:38.000351"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bắc Giang"], ["created_at", "2019-04-17 16:31:38.004292"], ["updated_at", "2019-04-17 16:31:38.004292"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Quảng Ninh"], ["created_at", "2019-04-17 16:31:38.014071"], ["updated_at", "2019-04-17 16:31:38.014071"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bắc Ninh"], ["created_at", "2019-04-17 16:31:38.024534"], ["updated_at", "2019-04-17 16:31:38.024534"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hà Nam"], ["created_at", "2019-04-17 16:31:38.029704"], ["updated_at", "2019-04-17 16:31:38.029704"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (10.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hải Dương"], ["created_at", "2019-04-17 16:31:38.043766"], ["updated_at", "2019-04-17 16:31:38.043766"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.7ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hưng Yên"], ["created_at", "2019-04-17 16:31:38.055801"], ["updated_at", "2019-04-17 16:31:38.055801"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hải Phòng"], ["created_at", "2019-04-17 16:31:38.063251"], ["updated_at", "2019-04-17 16:31:38.063251"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Nam Định"], ["created_at", "2019-04-17 16:31:38.073682"], ["updated_at", "2019-04-17 16:31:38.073682"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Ninh Bình"], ["created_at", "2019-04-17 16:31:38.083713"], ["updated_at", "2019-04-17 16:31:38.083713"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Thái Bình"], ["created_at", "2019-04-17 16:31:38.088269"], ["updated_at", "2019-04-17 16:31:38.088269"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Vĩnh Phúc"], ["created_at", "2019-04-17 16:31:38.097922"], ["updated_at", "2019-04-17 16:31:38.097922"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Thanh Hoá "], ["created_at", "2019-04-17 16:31:38.107748"], ["updated_at", "2019-04-17 16:31:38.107748"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Nghệ An"], ["created_at", "2019-04-17 16:31:38.112706"], ["updated_at", "2019-04-17 16:31:38.112706"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hà Tĩnh "], ["created_at", "2019-04-17 16:31:38.123328"], ["updated_at", "2019-04-17 16:31:38.123328"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (15.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Quảng Bình"], ["created_at", "2019-04-17 16:31:38.142481"], ["updated_at", "2019-04-17 16:31:38.142481"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Quảng Trị"], ["created_at", "2019-04-17 16:31:38.159649"], ["updated_at", "2019-04-17 16:31:38.159649"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Quảng Nam"], ["created_at", "2019-04-17 16:31:38.169498"], ["updated_at", "2019-04-17 16:31:38.169498"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Quảng Ngãi"], ["created_at", "2019-04-17 16:31:38.173848"], ["updated_at", "2019-04-17 16:31:38.173848"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bình Định"], ["created_at", "2019-04-17 16:31:38.183481"], ["updated_at", "2019-04-17 16:31:38.183481"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Phú Yên"], ["created_at", "2019-04-17 16:31:38.193535"], ["updated_at", "2019-04-17 16:31:38.193535"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Khánh Hoà"], ["created_at", "2019-04-17 16:31:38.198050"], ["updated_at", "2019-04-17 16:31:38.198050"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Ninh Thuận"], ["created_at", "2019-04-17 16:31:38.208883"], ["updated_at", "2019-04-17 16:31:38.208883"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bình Thuận"], ["created_at", "2019-04-17 16:31:38.219357"], ["updated_at", "2019-04-17 16:31:38.219357"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kon Tum"], ["created_at", "2019-04-17 16:31:38.223864"], ["updated_at", "2019-04-17 16:31:38.223864"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Gia Lai"], ["created_at", "2019-04-17 16:31:38.233743"], ["updated_at", "2019-04-17 16:31:38.233743"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Đắc Lắc"], ["created_at", "2019-04-17 16:31:38.243417"], ["updated_at", "2019-04-17 16:31:38.243417"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Đắc Nông"], ["created_at", "2019-04-17 16:31:38.247565"], ["updated_at", "2019-04-17 16:31:38.247565"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bình Phước"], ["created_at", "2019-04-17 16:31:38.256952"], ["updated_at", "2019-04-17 16:31:38.256952"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bình Dương"], ["created_at", "2019-04-17 16:31:38.266157"], ["updated_at", "2019-04-17 16:31:38.266157"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Đồng Nai"], ["created_at", "2019-04-17 16:31:38.270047"], ["updated_at", "2019-04-17 16:31:38.270047"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tây Ninh"], ["created_at", "2019-04-17 16:31:38.279457"], ["updated_at", "2019-04-17 16:31:38.279457"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Vũng Tàu"], ["created_at", "2019-04-17 16:31:38.288822"], ["updated_at", "2019-04-17 16:31:38.288822"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Long An"], ["created_at", "2019-04-17 16:31:38.293295"], ["updated_at", "2019-04-17 16:31:38.293295"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Đồng Tháp"], ["created_at", "2019-04-17 16:31:38.304006"], ["updated_at", "2019-04-17 16:31:38.304006"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (11.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Tiền Giang"], ["created_at", "2019-04-17 16:31:38.318555"], ["updated_at", "2019-04-17 16:31:38.318555"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "An Giang"], ["created_at", "2019-04-17 16:31:38.322681"], ["updated_at", "2019-04-17 16:31:38.322681"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bến Tre"], ["created_at", "2019-04-17 16:31:38.332243"], ["updated_at", "2019-04-17 16:31:38.332243"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Vĩnh Long"], ["created_at", "2019-04-17 16:31:38.342937"], ["updated_at", "2019-04-17 16:31:38.342937"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (15.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Trà Vinh"], ["created_at", "2019-04-17 16:31:38.360878"], ["updated_at", "2019-04-17 16:31:38.360878"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.5ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Hậu Giang"], ["created_at", "2019-04-17 16:31:38.371489"], ["updated_at", "2019-04-17 16:31:38.371489"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.6ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kiên Giang"], ["created_at", "2019-04-17 16:31:38.382881"], ["updated_at", "2019-04-17 16:31:38.382881"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sóc Trăng"], ["created_at", "2019-04-17 16:31:38.388441"], ["updated_at", "2019-04-17 16:31:38.388441"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bạc Liêu"], ["created_at", "2019-04-17 16:31:38.398438"], ["updated_at", "2019-04-17 16:31:38.398438"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Cà Mau"], ["created_at", "2019-04-17 16:31:38.408671"], ["updated_at", "2019-04-17 16:31:38.408671"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mCity Create (0.4ms)[0m  [1m[32mINSERT INTO "cities" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Cần Thơ"], ["created_at", "2019-04-17 16:31:38.413454"], ["updated_at", "2019-04-17 16:31:38.413454"]]
+  ↳ db/seeds.rb:22
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.5ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Đà Nẵng vivu"], ["price", 7990000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Các bạn sẽ có một chuyến đi nhớ đời"], ["created_at", "2019-04-17 16:31:38.438492"], ["updated_at", "2019-04-17 16:31:38.438492"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (22.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.4ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Đà Nẵng vivu"], ["price", 8990000.0], ["rating", 4.5], ["date", "weekend"], ["description", "Các bạn sẽ có một chuyến đi nhớ đời"], ["created_at", "2019-04-17 16:31:38.464519"], ["updated_at", "2019-04-17 16:31:38.464519"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.6ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Hà Nội hồ hởi"], ["price", 8990000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Vui lên đi"], ["created_at", "2019-04-17 16:31:38.475271"], ["updated_at", "2019-04-17 16:31:38.475271"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.6ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Hà Nội hồ hởi"], ["price", 13990000.0], ["rating", 4.5], ["date", "weekend"], ["description", "Vui lên đi"], ["created_at", "2019-04-17 16:31:38.486821"], ["updated_at", "2019-04-17 16:31:38.486821"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.6ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Sài Gòn thâu đêm"], ["price", 6990000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Nhớ ngủ sớm"], ["created_at", "2019-04-17 16:31:38.492993"], ["updated_at", "2019-04-17 16:31:38.492993"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.4ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Sài Gòn thâu đêm"], ["price", 16990000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Nhớ ngủ sớm"], ["created_at", "2019-04-17 16:31:38.503984"], ["updated_at", "2019-04-17 16:31:38.503984"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.5ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Đà Lạt mộng mơ"], ["price", 3000000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Trốn hè"], ["created_at", "2019-04-17 16:31:38.514799"], ["updated_at", "2019-04-17 16:31:38.514799"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.6ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Đà Lạt mộng mơ"], ["price", 3000000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Trốn hè"], ["created_at", "2019-04-17 16:31:38.520525"], ["updated_at", "2019-04-17 16:31:38.520525"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:33
+  [1m[36mTravel Create (0.4ms)[0m  [1m[32mINSERT INTO "travels" ("title", "price", "rating", "date", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Đà Lạt mộng mơ"], ["price", 6000000.0], ["rating", 4.5], ["date", "weekday"], ["description", "Trốn hè"], ["created_at", "2019-04-17 16:31:38.532211"], ["updated_at", "2019-04-17 16:31:38.532211"]]
+  ↳ db/seeds.rb:33
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:33
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.6ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 1], ["city_id", 1], ["created_at", "2019-04-17 16:31:38.572159"], ["updated_at", "2019-04-17 16:31:38.572159"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (16.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.4ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 2], ["city_id", 2], ["created_at", "2019-04-17 16:31:38.594279"], ["updated_at", "2019-04-17 16:31:38.594279"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.5ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.7ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 3], ["city_id", 2], ["created_at", "2019-04-17 16:31:38.608025"], ["updated_at", "2019-04-17 16:31:38.608025"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.4ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 4], ["city_id", 3], ["created_at", "2019-04-17 16:31:38.622375"], ["updated_at", "2019-04-17 16:31:38.622375"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.3ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 5], ["city_id", 1], ["created_at", "2019-04-17 16:31:38.629134"], ["updated_at", "2019-04-17 16:31:38.629134"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.3ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 6], ["city_id", 3], ["created_at", "2019-04-17 16:31:38.641143"], ["updated_at", "2019-04-17 16:31:38.641143"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.5ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 7], ["city_id", 1], ["created_at", "2019-04-17 16:31:38.653870"], ["updated_at", "2019-04-17 16:31:38.653870"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.4ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 8], ["city_id", 2], ["created_at", "2019-04-17 16:31:38.661453"], ["updated_at", "2019-04-17 16:31:38.661453"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:41
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:41
+  [1m[36mStart Create (0.5ms)[0m  [1m[32mINSERT INTO "starts" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 9], ["city_id", 3], ["created_at", "2019-04-17 16:31:38.674119"], ["updated_at", "2019-04-17 16:31:38.674119"]]
+  ↳ db/seeds.rb:41
+  [1m[35m (13.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.7ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 1], ["city_id", 3], ["created_at", "2019-04-17 16:31:38.708663"], ["updated_at", "2019-04-17 16:31:38.708663"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.2ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 2], ["city_id", 3], ["created_at", "2019-04-17 16:31:38.720901"], ["updated_at", "2019-04-17 16:31:38.720901"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 3], ["city_id", 1], ["created_at", "2019-04-17 16:31:38.727158"], ["updated_at", "2019-04-17 16:31:38.727158"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 4], ["city_id", 1], ["created_at", "2019-04-17 16:31:38.739231"], ["updated_at", "2019-04-17 16:31:38.739231"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.5ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 5], ["city_id", 2], ["created_at", "2019-04-17 16:31:38.752896"], ["updated_at", "2019-04-17 16:31:38.752896"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 6], ["city_id", 2], ["created_at", "2019-04-17 16:31:38.760332"], ["updated_at", "2019-04-17 16:31:38.760332"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 7], ["city_id", 4], ["created_at", "2019-04-17 16:31:38.771557"], ["updated_at", "2019-04-17 16:31:38.771557"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 8], ["city_id", 4], ["created_at", "2019-04-17 16:31:38.783239"], ["updated_at", "2019-04-17 16:31:38.783239"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:49
+  [1m[36mTravel Load (0.2ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:49
+  [1m[36mDestination Create (0.3ms)[0m  [1m[32mINSERT INTO "destinations" ("travel_id", "city_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["travel_id", 9], ["city_id", 4], ["created_at", "2019-04-17 16:31:38.788889"], ["updated_at", "2019-04-17 16:31:38.788889"]]
+  ↳ db/seeds.rb:49
+  [1m[35m (7.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:49
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:57
+  [1m[36mHistory Create (0.9ms)[0m  [1m[32mINSERT INTO "histories" ("user_id", "travel_id", "status", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["travel_id", 1], ["status", "done"], ["created_at", "2019-04-17 16:31:38.806992"], ["updated_at", "2019-04-17 16:31:38.806992"]]
+  ↳ db/seeds.rb:57
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:57
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:57
+  [1m[36mHistory Create (0.3ms)[0m  [1m[32mINSERT INTO "histories" ("user_id", "travel_id", "status", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["travel_id", 2], ["status", "done"], ["created_at", "2019-04-17 16:31:38.818109"], ["updated_at", "2019-04-17 16:31:38.818109"]]
+  ↳ db/seeds.rb:57
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:57
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:57
+  [1m[36mHistory Create (0.3ms)[0m  [1m[32mINSERT INTO "histories" ("user_id", "travel_id", "status", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["travel_id", 5], ["status", "booked"], ["created_at", "2019-04-17 16:31:38.822263"], ["updated_at", "2019-04-17 16:31:38.822263"]]
+  ↳ db/seeds.rb:57
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:57
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:34:19 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (uninitialized constant HistoriesController):
+  
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:34:50 +0700
+  
+ActionController::RoutingError (uninitialized constant HistoriesController):
+  
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.3) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:36:18 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+    return json: {
+                ^):
+  
+app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:36:44 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+    return json: {
+                ^):
+  
+app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:37:46 +0700
+  [1m[35m (6.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+    return json: {
+                ^):
+  
+app/controllers/histories_controller.rb:4: syntax error, unexpected ':', expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:38:12 +0700
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:4
+Completed 200 OK in 23ms (Views: 8.2ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:50:29 +0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.7ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:7
+Completed 200 OK in 23ms (Views: 9.0ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:50:55 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.8ms)[0m  [1m[34mSELECT  "histories".* FROM "histories" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.0ms)
+
+
+  
+  [1m[36mCACHE History Load (0.0ms)[0m  [1m[34mSELECT  "histories".* FROM "histories" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `to_csv' for #<History::ActiveRecord_Relation:0x00005585f6238260>
+Did you mean?  to_s):
+  
+app/controllers/histories_controller.rb:5:in `block in show'
+app/controllers/histories_controller.rb:4:in `open'
+app/controllers/histories_controller.rb:4:in `show'
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:51:06 +0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (1.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:7
+Completed 200 OK in 36ms (Views: 17.6ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:51:59 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:8
+Completed 200 OK in 23ms (Views: 9.1ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:55:42 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:17: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/histories_controller.rb:17: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:55:53 +0700
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.7ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 200 OK in 40ms (Views: 2.9ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:56:14 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (1.1ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 5.8ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 2, expected 1)):
+  
+app/controllers/histories_controller.rb:13:in `write'
+app/controllers/histories_controller.rb:13:in `block (2 levels) in save_result'
+app/controllers/histories_controller.rb:12:in `block in save_result'
+app/controllers/histories_controller.rb:11:in `open'
+app/controllers/histories_controller.rb:11:in `save_result'
+app/controllers/histories_controller.rb:4:in `show'
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:56:25 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 5.3ms)
+
+
+  
+TypeError (String can't be coerced into Integer):
+  
+app/controllers/histories_controller.rb:13:in `+'
+app/controllers/histories_controller.rb:13:in `block (2 levels) in save_result'
+app/controllers/histories_controller.rb:12:in `block in save_result'
+app/controllers/histories_controller.rb:11:in `open'
+app/controllers/histories_controller.rb:11:in `save_result'
+app/controllers/histories_controller.rb:4:in `show'
+Started GET "/history" for 127.0.0.1 at 2019-04-17 23:56:59 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.9ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 5.6ms)
+
+
+  
+TypeError (no implicit conversion of Integer into String):
+  
+app/controllers/histories_controller.rb:13:in `+'
+app/controllers/histories_controller.rb:13:in `block (2 levels) in save_result'
+app/controllers/histories_controller.rb:12:in `block in save_result'
+app/controllers/histories_controller.rb:11:in `open'
+app/controllers/histories_controller.rb:11:in `save_result'
+app/controllers/histories_controller.rb:4:in `show'
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:07:31 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.6ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 6.2ms)
+
+
+  
+NoMethodError (undefined method `travel' for #<History:0x00007f10ecd393f8>
+Did you mean?  travel_id):
+  
+app/controllers/histories_controller.rb:14:in `block (2 levels) in save_result'
+app/controllers/histories_controller.rb:12:in `block in save_result'
+app/controllers/histories_controller.rb:11:in `open'
+app/controllers/histories_controller.rb:11:in `save_result'
+app/controllers/histories_controller.rb:4:in `show'
+  [1m[36mHistory Load (0.4ms)[0m  [1m[34mSELECT  "histories".* FROM "histories" ORDER BY "histories"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mHistory Load (0.9ms)[0m  [1m[34mSELECT  "histories".* FROM "histories" ORDER BY "histories"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTravel Load (0.5ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:09:24 +0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.8ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.5ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+Completed 200 OK in 106ms (Views: 1.4ms | ActiveRecord: 19.6ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:20:36 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:29: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/histories_controller.rb:29: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:20:53 +0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:21:42 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:21:55 +0700
+  
+SyntaxError (/home/sihc/Project/Travel-Recommendation/app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/controllers/histories_controller.rb:30: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:22:26 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.6ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mCity Load (0.5ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:14
+Completed 200 OK in 118ms (Views: 1.2ms | ActiveRecord: 20.7ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:23:17 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.6ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+Completed 200 OK in 33ms (Views: 1.2ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:23:29 +0700
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (1.0ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.5ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.2ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+Completed 200 OK in 98ms (Views: 1.6ms | ActiveRecord: 22.1ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:24:23 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.6ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.5ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+Completed 500 Internal Server Error in 75ms (ActiveRecord: 16.6ms)
+
+
+  
+ArgumentError (comparison of String with 10000000 failed):
+  
+app/controllers/histories_controller.rb:25:in `>'
+app/controllers/histories_controller.rb:25:in `classify_price'
+app/controllers/histories_controller.rb:17:in `block (2 levels) in save_result'
+app/controllers/histories_controller.rb:12:in `block in save_result'
+app/controllers/histories_controller.rb:11:in `open'
+app/controllers/histories_controller.rb:11:in `save_result'
+app/controllers/histories_controller.rb:4:in `show'
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:24:41 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.2ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+Completed 200 OK in 86ms (Views: 1.2ms | ActiveRecord: 18.6ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:26:07 +0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sihc/.rbenv/versions/2.4.6/lib/ruby/gems/2.4.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.5ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.6ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.3ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.2ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.4ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.3ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+Completed 200 OK in 82ms (Views: 0.9ms | ActiveRecord: 19.4ms)
+
+
+Started GET "/history" for 127.0.0.1 at 2019-04-18 00:27:08 +0700
+Processing by HistoriesController#show as HTML
+  [1m[36mHistory Load (0.6ms)[0m  [1m[34mSELECT "histories".* FROM "histories"[0m
+  ↳ app/controllers/histories_controller.rb:12
+  [1m[36mTravel Load (0.5ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (2.0ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (4.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.5ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mTravel Load (0.6ms)[0m  [1m[34mSELECT  "travels".* FROM "travels" WHERE "travels"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mStart Load (0.4ms)[0m  [1m[34mSELECT  "starts".* FROM "starts" WHERE "starts"."travel_id" = $1 LIMIT $2[0m  [["travel_id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" WHERE "cities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/histories_controller.rb:15
+Completed 200 OK in 40ms (Views: 1.6ms | ActiveRecord: 9.5ms)
+
+

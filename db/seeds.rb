@@ -16,7 +16,7 @@ puts 'Default password: 123456'
 
 
 cities = CSV.read("./db/cities.csv")
-print 'Create cities     : '
+print 'Create cities      : '
 for row in cities
     city = City.new(name: row[0], rating: 3.0)
     print '.' if city.save()
@@ -25,7 +25,7 @@ puts ' ok'
 
 
 travels = CSV.read("./db/travels.csv")
-print 'Create travels    : '
+print 'Create travels     : '
 for row in travels
     travel = Travel.new(title: row[0], price: row[1], rating: row[2],
                         date: row[3], duration: row[4],
@@ -35,7 +35,7 @@ end
 puts ' ok'
 
 starts = CSV.read("./db/starts.csv")
-print 'Create starts     : '
+print 'Create starts      : '
 for row in starts
     start = Start.new(travel_id: row[0], city_id: row[1])
     print '.' if start.save()
