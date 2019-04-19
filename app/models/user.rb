@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :username, :password, :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
-  
+
   before_create { generate_token(:auth_token) }
   # validate  :birthday?
 
@@ -10,7 +10,11 @@ class User < ApplicationRecord
   enum role: ['Admin', 'Dev', 'User']
   enum gender: ['Nam', 'Nữ', 'Ngại quá à']
 
+
   has_many :history
+  has_one :favorite
+  has_many :suggestions
+
 
   def generate_token(column)
     begin

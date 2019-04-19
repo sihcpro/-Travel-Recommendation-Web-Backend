@@ -11,12 +11,15 @@ require 'time'
 require 'csv'
 
 def build_user
-  puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com", password: "123456", gender: 0, role: 2).save
-  puts 'Created Test'  if User.new(username: "test", email: "test", password: "123456", gender: 0, role: 1).save
+  puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
+                                   password: "123456", gender: 0, role: 2).save
+  puts 'Created Test'  if User.new(username: "test", email: "test",
+                                   password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
   (1..500).each do |n|
-    print '.' if User.new(username: "user#{n}", email: "user#{n}", password: "123456", gender: n%2, role: 0).save
+    print '.' if User.new(username: "user#{n}", email: "user#{n}",
+                          password: "123456", gender: n%2, role: 0).save
   end
   puts 'ok'
 end
@@ -37,7 +40,8 @@ def build_random_travel
   (0..(cities.size-2)).each do |start_id|
     ((start_id+1)..(cities.size-1)).each do |destination_id|
       ['weekday', 'weekend'].each do |date|
-        if ['Đà Nẵng', 'Hồ Chí Minh', 'Hà Nội', 'Lâm Đồng'].include?(cities[destination_id])
+        if ['Đà Nẵng', 'Hồ Chí Minh',
+            'Hà Nội', 'Lâm Đồng'].include?(cities[destination_id])
           rating = 5
         else
           rating = 4
@@ -172,11 +176,44 @@ def classify_price(price)
 end
 
 def build_suggestions
-  suggestions = File.read("./CARSKit.Workspace/CAMF_CU-top-10-items fold [1].txt")
+  # suggestions = 
+  print 'Create suggestion: '
   line_number = 0
-  suggestions.each do |suggestion|
-    puts suggestion
+  File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [1].txt").each do |line|
+    line_number += 1
+    next if line_number == 1
+    break if line_number == 3
+    user_id = line.match(/[\d]+/).to_s.to_i
+    favorites = line.scan(/[\w ]+:[\w ]+;/u)
+    suggestions = line.scan(/\([^\(]+\)/)
+    # puts user_id
+    # puts favorites
+    # puts suggestions
+
+    favorite_map = {}
+    favorites.each do |item|
+      title = item.match(/[\w ]+:/u).to_s.chomp(":")
+      value = item.match(/[\w ]+;/u).to_s.chomp(";")
+      favorite_map[title] = value
+    end
+    favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
+                            date: favorite_map['date'],
+                            duration: favorite_map['duration'].to_s.to_i)
+    print '-' if favorite.save()
+    puts favorite.inspect
+
+    suggestions.each do |item|
+      travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
+      rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
+
+      suggestion = Suggestion.new(user_id: user_id, travel_id: travel_id,
+                                  rate: rate)
+
+      print '.' if suggestion.save()
+      # break
+    end
   end
+  puts ' ok'
 end
 
 
@@ -196,7 +233,7 @@ if !History.first
   build_random_history()
 end
 
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
 if !Suggestion.first
   build_suggestions()

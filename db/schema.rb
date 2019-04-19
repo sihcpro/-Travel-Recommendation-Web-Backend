@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_17_043811) do
+ActiveRecord::Schema.define(version: 2019_04_19_170629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 2019_04_17_043811) do
     t.index ["travel_id"], name: "index_destinations_on_travel_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "price"
+    t.string "date"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "histories", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "travel_id"
@@ -53,6 +63,16 @@ ActiveRecord::Schema.define(version: 2019_04_17_043811) do
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_starts_on_city_id"
     t.index ["travel_id"], name: "index_starts_on_travel_id"
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "travel_id"
+    t.float "rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["travel_id"], name: "index_suggestions_on_travel_id"
+    t.index ["user_id"], name: "index_suggestions_on_user_id"
   end
 
   create_table "travels", force: :cascade do |t|
