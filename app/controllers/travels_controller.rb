@@ -8,12 +8,16 @@ class TravelsController < ApplicationController
       for @destination in @destinations
         @cities += [@destination.city.name]
       end
+      @start = travel.start
+      if @start
+        @start = @start.city.name
+      end
       @result += [{
         id: travel.id,
         title: travel.title,
         date: travel.date,
         duration: travel.duration,
-        start: travel.start.city.name,
+        start: @start,
         destinations: @cities
       }]
     end

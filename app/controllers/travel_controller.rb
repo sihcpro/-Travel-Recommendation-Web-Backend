@@ -6,13 +6,17 @@ class TravelController < ApplicationController
     for @destination in @destinations
       @cities += [@destination.city.name]
     end
+    @start = @travel.start
+    if @start
+      @start = @start.city.name
+    end
     render json: if @travel
       {
         id: @travel.id,
         title: @travel.title,
         date: @travel.date,
         duration: @travel.duration,
-        start: @travel.start.city.name,
+        start: @start,
         destinations: @cities,
         status: 201
       }

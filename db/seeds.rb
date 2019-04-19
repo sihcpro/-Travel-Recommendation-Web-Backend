@@ -7,76 +7,76 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+require 'time'
 require 'csv'
 
-puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com", password: "123456", gender: 0, role: 2).save
-puts 'Created Test'  if User.new(username: "test", email: "test", password: "123456", gender: 0, role: 1).save
-puts 'Default password: 123456'
-print 'Create user        : '
-(1..100).each do |n|
-  print '.' if User.new(username: "user#{n}", email: "user#{n}", password: "123456", gender: n%2, role: 0).save
+def build_user
+  puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com", password: "123456", gender: 0, role: 2).save
+  puts 'Created Test'  if User.new(username: "test", email: "test", password: "123456", gender: 0, role: 1).save
+  puts 'Default password: 123456'
+  print 'Create user     : '
+  (1..500).each do |n|
+    print '.' if User.new(username: "user#{n}", email: "user#{n}", password: "123456", gender: n%2, role: 0).save
+  end
+  puts 'ok'
 end
-puts 'ok'
 
-
-cities = CSV.read("./db/cities.csv")
-print 'Create cities      : '
-for row in cities
-  city = City.new(name: row[0], rating: 3.0)
-  print '.' if city.save()
+def build_cities
+  cities = CSV.read("./db/cities.csv")
+  print 'Create cities   : '
+  for row in cities
+    city = City.new(name: row[0], rating: 3.0)
+    print '.' if city.save()
+  end
+  puts ' ok'
 end
-puts ' ok'
 
+def build_random_travel
+  print('Create travels  : ')
+  cities = City.all()
+  (0..(cities.size-2)).each do |start_id|
+    ((start_id+1)..(cities.size-1)).each do |destination_id|
+      ['weekday', 'weekend'].each do |date|
+        if ['Đà Nẵng', 'Hồ Chí Minh', 'Hà Nội', 'Lâm Đồng'].include?(cities[destination_id])
+          rating = 5
+        else
+          rating = 4
+        end
+        price = (destination_id - start_id).abs * 200000 + 1000000
+        if date == 'weekend'
+          price = (price * 1.3).round(-5)
+        end
+        duration = ((destination_id - start_id).abs * 0.25 + 1).round()
 
-travels = CSV.read("./db/travels.csv")
-print 'Create travels     : '
-for row in travels
-  travel = Travel.new(title: row[0], price: row[1], rating: row[2],
-                      date: row[3], duration: row[4],
-                      description: row[5])
-  print '-' if travel.save()
-  start = Start.new(travel_id: travel.id,
-                    city_id: City.find_by(name: row[6]).id)
-  print '=' if start.save()
-  destination = Destination.new(travel_id: travel.id,
-                                city_id: City.find_by(name: row[7]).id)
-  print '>' if destination.save()
+        travel = Travel.new(title: cities[destination_id].name,
+                            price: price,
+                            rating: rating,
+                            date: date,
+                            duration: duration,
+                            description: 'Not yet')
+        print '-' if travel.save()
+        # puts travel.inspect
+        # puts travel.id
+        # puts 'Start: ' + cities[start_id].id.to_s
+        start = Start.new(travel_id: travel.id,
+                          city_id: cities[start_id].id)
+        print '=' if start.save()
+        # puts 'Destination: ' + cities[destination_id].name
+        destination = Destination.new(travel_id: travel.id,
+                                      city_id: cities[destination_id].id)
+        print '>' if destination.save()
+      end
+    end
+  end
+  puts ' ok'
 end
-puts ' ok'
 
-# starts = CSV.read("./db/starts.csv")
-# print 'Create starts      : '
-# for row in starts
-#   start = Start.new(travel_id: row[0], city_id: row[1])
-#   print '.' if start.save()
-# end
-# puts ' ok'
-
-# destination = CSV.read("./db/destinations.csv")
-# print 'Create destinations: '
-# for row in destination
-#   destination = Destination.new(travel_id: row[0], city_id: row[1])
-#   print '.' if destination.save()
-# end
-# puts ' ok'
-
-# histories = CSV.read("./db/histories.csv")
-# print 'Create histories   : '
-# for row in histories
-#   history = History.new(user_id: row[0], travel_id: row[1], status: row[2])
-#   print '.' if history.save()
-# end
-# puts ' ok'
-
-def build_random
+def build_random_history
+  rd = Random.new(Time.now.to_i)
   starts = Start.select('city_id').all.distinct.map{|i| i.city_id}
   prices = ['expensive', 'reasonable', 'cheap']
   dates = ['weekday', 'weekend']
   durations = Travel.select('duration').all.distinct.map{|i| i.duration}
-
-  require 'time'
-  # puts Time.now.to_i
-  rd = Random.new(Time.now.to_i)
 
   all_user = User.all
   user = User.first
@@ -158,6 +158,7 @@ def build_random
     end
     print('.')
   end
+  puts ' ok'
 end
 
 def classify_price(price)
@@ -170,7 +171,37 @@ def classify_price(price)
   end
 end
 
-build_random()
+def build_suggestions
+  suggestions = File.read("./CARSKit.Workspace/CAMF_CU-top-10-items fold [1].txt")
+  line_number = 0
+  suggestions.each do |suggestion|
+    puts suggestion
+  end
+end
 
-# while true
-# end
+
+if !User.first
+  build_user()
+end
+
+if !City.first
+  build_cities()
+end
+
+if !Travel.first
+  build_random_travel()
+end
+
+if !History.first
+  build_random_history()
+end
+
+system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+
+if !Suggestion.first
+  build_suggestions()
+end
+
+
+
+
