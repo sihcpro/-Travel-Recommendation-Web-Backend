@@ -79,7 +79,8 @@ def build_random_history
   rd = Random.new(Time.now.to_i)
   starts = Start.select('city_id').all.distinct.map{|i| i.city_id}
   prices = ['expensive', 'reasonable', 'cheap']
-  dates = ['weekday', 'weekend']
+  # dates = ['weekday', 'weekend']
+  dates = ['weekday']
   durations = Travel.select('duration').all.distinct.map{|i| i.duration}
 
   all_user = User.all
@@ -115,12 +116,12 @@ def build_random_history
 
       # using dict to save reues value
       if !dict_size_of_travel[start]
-        dict_size_of_travel[start] = City.find(start).travel.size
+        dict_size_of_travel[start] = City.find_by(id: start).travel.size
       end
 
       if user_characteristics['date']
         if user_characteristics['duration']
-          travels = City.find(start).travel.where(date: date, duration: duration)
+          travels = City.find_by(id: start).travel.where(date: date, duration: duration)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -129,7 +130,7 @@ def build_random_history
             end
           end
         else
-          travels = City.find(start).travel.where(date: date)
+          travels = City.find_by(id: start).travel.where(date: date)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -140,7 +141,7 @@ def build_random_history
         end
       else
         if user_characteristics['duration']
-          travels = City.find(start).travel.where(duration: duration)
+          travels = City.find_by(id: start).travel.where(duration: duration)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -149,7 +150,7 @@ def build_random_history
             end
           end
         else
-          travels = City.find(start).travel
+          travels = City.find_by(id: start).travel
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -177,43 +178,49 @@ end
 
 def build_suggestions
   # suggestions = 
-  print 'Create suggestion: '
-  line_number = 0
-  File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [1].txt").each do |line|
-    line_number += 1
-    next if line_number == 1
-    break if line_number == 3
-    user_id = line.match(/[\d]+/).to_s.to_i
-    favorites = line.scan(/[\w ]+:[\w ]+;/u)
-    suggestions = line.scan(/\([^\(]+\)/)
-    # puts user_id
-    # puts favorites
-    # puts suggestions
+  puts 'Create suggestion: '
 
-    favorite_map = {}
-    favorites.each do |item|
-      title = item.match(/[\w ]+:/u).to_s.chomp(":")
-      value = item.match(/[\w ]+;/u).to_s.chomp(";")
-      favorite_map[title] = value
+  (1..5).each do |i|
+    line_number = 0
+    print "-> #{i} : "
+    File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [#{i}].txt").each do |line|
+      line_number += 1
+      next if line_number == 1
+      user_id = line.match(/[\d]+/).to_s.to_i
+      favorites = line.scan(/[\w ]+:[\w ]+;/u)
+      suggestions = line.scan(/\([^\(]+\)/)
+      # puts user_id
+      # puts favorites
+      # puts suggestions
+
+      favorite_map = {}
+      favorites.each do |item|
+        title = item.match(/[\w ]+:/u).to_s.chomp(":")
+        value = item.match(/[\w ]+;/u).to_s.chomp(";")
+        favorite_map[title] = value
+      end
+      if !Favorite.find_by(user_id: user_id)
+        favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
+                                date: favorite_map['date'],
+                                duration: favorite_map['duration'].to_s.to_i)
+        print '>' if favorite.save()
+        # puts favorite.inspect
+
+        suggestions.each do |item|
+          travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
+          rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
+
+          suggestion = Suggestion.new(user_id: user_id, travel_id: travel_id,
+                                      rate: rate)
+
+          print '.' if suggestion.save()
+          # break
+        end
+      end
     end
-    favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
-                            date: favorite_map['date'],
-                            duration: favorite_map['duration'].to_s.to_i)
-    print '-' if favorite.save()
-    puts favorite.inspect
-
-    suggestions.each do |item|
-      travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
-      rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
-
-      suggestion = Suggestion.new(user_id: user_id, travel_id: travel_id,
-                                  rate: rate)
-
-      print '.' if suggestion.save()
-      # break
-    end
+    puts ' ok'
   end
-  puts ' ok'
+  puts 'Suggestion done'
 end
 
 
@@ -233,11 +240,9 @@ if !History.first
   build_random_history()
 end
 
-# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-if !Suggestion.first
-  build_suggestions()
-end
+build_suggestions()
 
 
 

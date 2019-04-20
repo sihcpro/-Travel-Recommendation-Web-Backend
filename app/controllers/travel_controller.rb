@@ -1,7 +1,7 @@
 class TravelController < ApplicationController
   def show
-    @travel = Travel.find(params[:id])
-    @destinations = @travel.destination
+    @travel = Travel.find_by(id: params[:id])
+    @destinations = @travel.destinations
     @cities = []
     for @destination in @destinations
       @cities += [@destination.city.name]
@@ -16,6 +16,7 @@ class TravelController < ApplicationController
         title: @travel.title,
         date: @travel.date,
         duration: @travel.duration,
+        price: @travel.price,
         start: @start,
         destinations: @cities,
         status: 201

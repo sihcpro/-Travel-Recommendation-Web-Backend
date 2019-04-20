@@ -1,9 +1,10 @@
 class TravelsController < ApplicationController
   def show
+    # Travel.joins(:start => :city).select("travels.id as travel_id").first.travel_id
     @travels = Travel.all
     @result = []
     @travels.each do |travel|
-      @destinations = travel.destination
+      @destinations = travel.destinations
       @cities = []
       for @destination in @destinations
         @cities += [@destination.city.name]

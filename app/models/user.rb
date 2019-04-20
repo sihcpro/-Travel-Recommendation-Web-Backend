@@ -11,9 +11,10 @@ class User < ApplicationRecord
   enum gender: ['Nam', 'Nữ', 'Ngại quá à']
 
 
-  has_many :history
+  has_many :histories
   has_one :favorite
   has_many :suggestions
+  has_many :comments
 
 
   def generate_token(column)

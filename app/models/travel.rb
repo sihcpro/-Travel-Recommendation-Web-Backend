@@ -3,7 +3,8 @@ class Travel < ApplicationRecord
 
     has_one :start
     has_one :city, through: :start
-    has_many :destination
-    has_many :city, through: :destination
-    has_many :history
+    has_many :destinations
+    has_many :cities, through: :destination
+    has_many :histories
+    has_many :comments
 end
