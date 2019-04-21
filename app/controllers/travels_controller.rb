@@ -1,30 +1,37 @@
 class TravelsController < ApplicationController
   def show
     # Travel.joins(:start => :city).select("travels.id as travel_id").first.travel_id
-    @travels = Travel.all
-    @result = []
-    @travels.each do |travel|
-      @destinations = travel.destinations
-      @cities = []
-      for @destination in @destinations
-        @cities += [@destination.city.name]
+    @destinations_name = Destination.joins(:city
+      ).select("travel_id",
+               "cities.name as destination_name").order("travel_id")
+    @destinations = {}
+    @destinations_name.each do |item|
+      if @destinations[item.travel_id]
+        @destinations[item.travel_id] = @destinations[item.travel_id] + [item.destination_name]
+      else
+        @destinations[item.travel_id] = [item.destination_name]
       end
-      @start = travel.start
-      if @start
-        @start = @start.city.name
-      end
-      @result += [{
-        id: travel.id,
-        title: travel.title,
-        date: travel.date,
-        duration: travel.duration,
-        start: @start,
-        destinations: @cities
-      }]
     end
-    render json: {
-      travels: @result,
-      status: 201
-    }
+
+    @travels = Travel.joins(:start => :city).select("travels.*", "cities.name as start_name").all
+    travels = []
+    @travels.each do |item|
+      travel = item.attributes
+      travel['destinations'] = @destinations[item.id]
+      travels += [travel]
+    end
+
+    if params[:page]
+      page = params[:page].to_i
+      render json: {
+        travels: travels[(page * 10)..((page + 1) * 10 - 1)],
+        status: 201
+      }
+    else
+      render json: {
+        travels: travels,
+        status: 201
+      }
+    end
   end
 end

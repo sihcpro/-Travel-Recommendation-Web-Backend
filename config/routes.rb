@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resource :user
   resource :travel, as: :show
   resource :history, only: :show
-  resource :comment, only: %i[show update delete]
+  resource :comment, only: %i[new show update destroy]
   resources :travel, only: :show
   resources :start, only: :show
   resources :history, only: :show

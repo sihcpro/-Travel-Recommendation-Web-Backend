@@ -39,7 +39,8 @@ def build_random_travel
   cities = City.all()
   (0..(cities.size-2)).each do |start_id|
     ((start_id+1)..(cities.size-1)).each do |destination_id|
-      ['weekday', 'weekend'].each do |date|
+      # ['weekday', 'weekend'].each do |date|
+      ['weekday'].each do |date|
         if ['Đà Nẵng', 'Hồ Chí Minh',
             'Hà Nội', 'Lâm Đồng'].include?(cities[destination_id])
           rating = 5
