@@ -40,4 +40,5 @@ class CommentController < ApplicationController
 
   def update_comment_params
     params.permit(:rating, :content)
+  end
 end
