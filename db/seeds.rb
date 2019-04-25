@@ -18,7 +18,7 @@ def build_user(amount=500)
   puts 'Default password: 123456'
   print 'Create user     : '
   (1..amount).each do |n|
-    print '.' if User.new(username: "user#{n}", email: "user#{n}",
+    print '.' if User.new(username: "user#{n}", email: "user#{n}@b.c",
                           password: "123456", gender: n%2, role: 0).save
   end
   puts 'ok'
