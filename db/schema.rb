@@ -23,8 +23,14 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "travel_id"
+    t.integer "rating"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["travel_id"], name: "index_comments_on_travel_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "destinations", force: :cascade do |t|

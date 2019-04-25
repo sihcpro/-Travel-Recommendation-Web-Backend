@@ -10,24 +10,27 @@
 require 'time'
 require 'csv'
 
-def build_user
+def build_user(amount=500)
   puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
                                    password: "123456", gender: 0, role: 2).save
   puts 'Created Test'  if User.new(username: "test", email: "test",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
-  (1..500).each do |n|
+  (1..amount).each do |n|
     print '.' if User.new(username: "user#{n}", email: "user#{n}",
                           password: "123456", gender: n%2, role: 0).save
   end
   puts 'ok'
 end
 
-def build_cities
+def build_cities(limit=63)
   cities = CSV.read("./db/cities.csv")
   print 'Create cities   : '
+  cnt = 0
   for row in cities
+    cnt += 1
+    break if cnt == limit
     city = City.new(name: row[0], rating: 3.0)
     print '.' if city.save()
   end
@@ -37,8 +40,9 @@ end
 def build_random_travel
   print('Create travels  : ')
   cities = City.all()
-  (0..(cities.size-2)).each do |start_id|
-    ((start_id+1)..(cities.size-1)).each do |destination_id|
+  (0..(cities.size-1)).each do |start_id|
+    (0..(cities.size-1)).each do |destination_id|
+      next if start_id == destination_id
       # ['weekday', 'weekend'].each do |date|
       ['weekday'].each do |date|
         if ['Đà Nẵng', 'Hồ Chí Minh',
@@ -76,7 +80,7 @@ def build_random_travel
   puts ' ok'
 end
 
-def build_random_history
+def build_random_history(size=10)
   rd = Random.new(Time.now.to_i)
   starts = Start.select('city_id').all.distinct.map{|i| i.city_id}
   prices = ['expensive', 'reasonable', 'cheap']
@@ -90,7 +94,7 @@ def build_random_history
   print('Create histories: ')
 
   all_user.each do |user|
-    amount_of_travel = rd.rand(1..10)
+    amount_of_travel = rd.rand(1..size)
     rd_a =   [rd.rand(1..5), rd.rand(1..5), rd.rand(1..5), rd.rand(1..5)]
     bool_a = [rd_a[0] > 1  , rd_a[1] > 2  , rd_a[2] > 3  , rd_a[3] > 4  ]
     #         starts       , prices       , date         , duration
@@ -224,13 +228,43 @@ def build_suggestions
   puts 'Suggestion done'
 end
 
+def build_comments(limit=-1)
+  random_comments = [
+    ["Rất thú vị", 5],
+    ["Tôi nhất định đi lần nữa", 5],
+    ["Vui lắm luôn :D", 5],
+    ["Tôi nghĩ chuyến đi này không hợp với lứa tuổi của tôi", 3],
+    ["Đau cả người", 3],
+    ["Thức ăn dỡ quá", 3],
+    ["Mệt quá chừng", 4],
+    ["Trời mưa suốt ngày", 3],
+    ["Chán", 2],
+    ["Tour khủng khiếp", 1],
+  ]
+  all_histories = History.all
+  rd = Random.new(Time.now.to_i)
+
+  print('Create comment   : ')
+  cnt = 0
+  all_histories.each do |history|
+    cnt+=1
+    break if cnt == limit
+    random_comment = random_comments[rd.rand(0..random_comments.size-1)]
+
+    comment = Comment.new(user_id: history.user_id, travel_id: history.travel_id, content: random_comment[0], rating: random_comment[1])
+    print '.' if comment.save()
+  end
+  puts ' ok'
+end
+
+
 
 if !User.first
   build_user()
 end
 
 if !City.first
-  build_cities()
+  build_cities(35)
 end
 
 if !Travel.first
@@ -241,10 +275,13 @@ if !History.first
   build_random_history()
 end
 
+if !Comment.first
+  build_comments()
+end
+
 system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
 build_suggestions()
-
 
 
 
