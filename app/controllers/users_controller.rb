@@ -8,7 +8,11 @@ class UsersController < ApplicationController
     render json:  if !User.find_by(user_email_params).nil?
                     { message: 'Conflict', status: 409 }
                   elsif @user.save
-                    { message: 'Created', auth_token: @user.auth_token, id: @user.id, status: 201 }
+                    {
+                      message: 'Created',
+                      auth_token: @user.auth_token,
+                      id: @user.id, status: 201
+                    }
                   else
                     { message: @user.errors.full_messages, status: 404 }
                   end
@@ -17,7 +21,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(user_id_params)
     render json:  if @user
-                    { username: @user.username, gender: @user.gender, role: @user.role,
+                    {
+                      username: @user.username,
+                      gender: @user.gender, role: @user.role,
                       email: @user.email, status: 200 }
                   else
                     { message: 'Not found', status: 404 }
@@ -28,7 +34,11 @@ class UsersController < ApplicationController
     user = current_user
     message = if user
                 if user.update(user_update_params)
-                  { message: 'Accepted', status: 202 }
+                  { 
+                    user: user,
+                    message: 'Accepted',
+                    status: 202
+                  }
                 else
                   { message: 'Failed', status: 406 }
                 end

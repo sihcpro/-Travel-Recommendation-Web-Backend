@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  validates :username, :password, :email, presence: true
+  validates :username, :password, :email, presence: true, on: :create
   validates :email, uniqueness: { case_sensitive: false }
 
   before_create { generate_token(:auth_token) }

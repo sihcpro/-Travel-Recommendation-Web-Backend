@@ -80,8 +80,20 @@ def build_random_travel
   puts ' ok'
 end
 
-def build_random_history(size=10)
+def build_random_comment(size=10)
   rd = Random.new(Time.now.to_i)
+  random_comments = [
+    ["Rất thú vị", 5],
+    ["Tôi nhất định đi lần nữa", 5],
+    ["Vui lắm luôn :D", 5],
+    ["Tôi nghĩ chuyến đi này không hợp với lứa tuổi của tôi", 3],
+    ["Đau cả người", 3],
+    ["Thức ăn dỡ quá", 3],
+    ["Mệt quá chừng", 4],
+    ["Trời mưa suốt ngày", 3],
+    ["Chán", 2],
+    ["Tour khủng khiếp", 1],
+  ]
   starts = Start.select('city_id').all.distinct.map{|i| i.city_id}
   prices = ['expensive', 'reasonable', 'cheap']
   # dates = ['weekday', 'weekend']
@@ -91,8 +103,7 @@ def build_random_history(size=10)
   all_user = User.all
   user = User.first
 
-  print('Create histories: ')
-
+  print('Create comments: ')
   all_user.each do |user|
     amount_of_travel = rd.rand(1..size)
     rd_a =   [rd.rand(1..5), rd.rand(1..5), rd.rand(1..5), rd.rand(1..5)]
@@ -119,6 +130,8 @@ def build_random_history(size=10)
         start = rd.rand(1..(starts.size))
       end
 
+      comment = random_comments[rd.rand(0..random_comments.size-1)]
+
       # using dict to save reues value
       if !dict_size_of_travel[start]
         dict_size_of_travel[start] = City.find_by(id: start).travel.size
@@ -131,7 +144,7 @@ def build_random_history(size=10)
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if History.create(user_id: user.id, travel_id: travel.id)
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
             end
           end
         else
@@ -140,7 +153,7 @@ def build_random_history(size=10)
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if History.create(user_id: user.id, travel_id: travel.id)
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
             end
           end
         end
@@ -151,7 +164,7 @@ def build_random_history(size=10)
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if History.create(user_id: user.id, travel_id: travel.id)
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
             end
           end
         else
@@ -160,7 +173,7 @@ def build_random_history(size=10)
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if History.create(user_id: user.id, travel_id: travel.id)
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
             end
           end
         end
@@ -264,24 +277,20 @@ if !User.first
 end
 
 if !City.first
-  build_cities(35)
+  build_cities(30)
 end
 
 if !Travel.first
   build_random_travel()
 end
 
-if !History.first
-  build_random_history()
-end
-
 if !Comment.first
-  build_comments()
+  build_random_comment()
 end
 
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-build_suggestions()
+# build_suggestions()
 
 
 
