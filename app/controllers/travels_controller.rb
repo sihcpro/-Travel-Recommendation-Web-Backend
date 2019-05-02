@@ -24,14 +24,14 @@ class TravelsController < ApplicationController
     if params[:page]
       page = params[:page].to_i
       render json: {
-        travels: travels[(page * 10)..((page + 1) * 10 - 1)],
-        status: 201
-      }
+                      travels: travels[(page * 10)..((page + 1) * 10 - 1)],
+                      status: 201
+                    }
     else
       render json: {
-        travels: travels,
-        status: 201
-      }
+                      travels: travels,
+                      status: 201
+                    }
     end
   end
 end

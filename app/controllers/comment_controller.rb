@@ -33,6 +33,8 @@ class CommentController < ApplicationController
                       message: 'Comment not found',
                       status: 404
                     }
+                  end
+  end
 
   def update
     @comment = current_comment
@@ -64,9 +66,7 @@ class CommentController < ApplicationController
   end
 
   def current_comment
-    if params[:id]
-      Comment.find_by(id: params[:id])
-    end
+    Comment.find_by(id: params[:id]) if params[:id]
   end
 
   def update_comment_params
