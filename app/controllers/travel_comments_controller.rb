@@ -1,9 +1,9 @@
 class TravelCommentsController < ApplicationController
   def show
-    @travel = Travel.find_by(travel_id_params)
-    render json:  if @travel
+    @comments = Comment.joins(:user).select("comments.*", "users.username as username").where(travel_id: params[:id])
+    render json:  if @comments
                     {
-                      comments: @travel.comments,
+                      comments: @comments,
                       status: 200
                     }
                   else
@@ -12,9 +12,5 @@ class TravelCommentsController < ApplicationController
                       status: 204
                     }
                   end
-  end
-
-  def travel_id_params
-    params.permit(:id)
   end
 end
