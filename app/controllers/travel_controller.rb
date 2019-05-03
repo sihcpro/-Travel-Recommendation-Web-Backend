@@ -1,24 +1,16 @@
 class TravelController < ApplicationController
   def show
-    @travel = Travel.find_by(id: params[:id])
-    @destinations = @travel.destinations
-    @cities = []
-    for @destination in @destinations
-      @cities += [@destination.city.name]
-    end
-    @start = @travel.start
-    if @start
-      @start = @start.city.name
-    end
+    @travel = Travel.joins(:start => :city).select("travels.*", "cities.name as start_name").find_by(id: params[:id])
     render json:  if @travel
+                    @destinations = Destination.joins(:city).select("cities.name as destination").where(travel_id: 10).map{|i| i.destination}
                     {
                       id: @travel.id,
                       title: @travel.title,
                       date: @travel.date,
                       duration: @travel.duration,
                       price: @travel.price,
-                      start: @start,
-                      destinations: @cities,
+                      start: @travel.start_name,
+                      destinations: @destinations,
                       status: 201
                     }
                   else

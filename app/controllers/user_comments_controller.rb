@@ -1,20 +1,16 @@
 class UserCommentsController < ApplicationController
   def show
-    @user = User.find_by(user_id_params)
-    render json:  if @user
+    @comments = Comment.joins(:travel).select("comments.*", "travels.title as title").where(user_id: params[:id])
+    render json:  if @comments
                     {
-                      comments: @user.comments,
+                      comments: @comments,
                       status: 200
                     }
                   else
                     {
-                      message: 'Wrong user id!',
+                      message: 'No comments found!',
                       status: 204
                     }
                   end
-  end
-
-  def user_id_params
-    params.permit(:id)
   end
 end

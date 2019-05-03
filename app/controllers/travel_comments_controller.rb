@@ -8,7 +8,7 @@ class TravelCommentsController < ApplicationController
                     }
                   else
                     {
-                      message: 'Wrong travel id!',
+                      message: 'No comments found!',
                       status: 204
                     }
                   end
