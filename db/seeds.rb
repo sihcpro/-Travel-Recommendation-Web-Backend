@@ -37,6 +37,17 @@ def build_cities(limit=63)
   puts ' ok'
 end
 
+def build_types()
+  types = CSV.read("./db/types.csv")
+  print 'Create types    : '
+  cnt = 0
+  for row in types
+    cnt += 1
+    print '.' if Type.create(name: row[0])
+  end
+  puts ' ok'
+end
+
 def build_random_travel
   print('Create travels  : ')
   cities = City.all()
@@ -241,56 +252,36 @@ def build_suggestions
   puts 'Suggestion done'
 end
 
-def build_comments(limit=-1)
-  random_comments = [
-    ["Rất thú vị", 5],
-    ["Tôi nhất định đi lần nữa", 5],
-    ["Vui lắm luôn :D", 5],
-    ["Tôi nghĩ chuyến đi này không hợp với lứa tuổi của tôi", 3],
-    ["Đau cả người", 3],
-    ["Thức ăn dỡ quá", 3],
-    ["Mệt quá chừng", 4],
-    ["Trời mưa suốt ngày", 3],
-    ["Chán", 2],
-    ["Tour khủng khiếp", 1],
-  ]
-  all_histories = History.all
-  rd = Random.new(Time.now.to_i)
 
-  print('Create comment   : ')
-  cnt = 0
-  all_histories.each do |history|
-    cnt+=1
-    break if cnt == limit
-    random_comment = random_comments[rd.rand(0..random_comments.size-1)]
 
-    comment = Comment.new(user_id: history.user_id, travel_id: history.travel_id, content: random_comment[0], rating: random_comment[1])
-    print '.' if comment.save()
-  end
-  puts ' ok'
+
+
+
+
+
+# if !User.first
+#   build_user()
+# end
+
+# if !City.first
+#   build_cities(30)
+# end
+
+if !Type.first
+  build_types()
 end
 
+# if !Travel.first
+#   build_random_travel()
+# end
 
+# if !Comment.first
+#   build_random_comment()
+# end
 
-if !User.first
-  build_user()
-end
+# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-if !City.first
-  build_cities(30)
-end
-
-if !Travel.first
-  build_random_travel()
-end
-
-if !Comment.first
-  build_random_comment()
-end
-
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
-
-build_suggestions()
+# build_suggestions()
 
 
 

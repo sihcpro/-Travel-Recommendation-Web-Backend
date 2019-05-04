@@ -5,6 +5,7 @@ class CreateFavorites < ActiveRecord::Migration[5.2]
       t.string :price
       t.string :date
       t.integer :duration
+      t.integer :type
 
       t.timestamps
     end

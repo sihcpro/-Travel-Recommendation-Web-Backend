@@ -7,6 +7,7 @@ class CreateTravels < ActiveRecord::Migration[5.2]
       t.string :date
       t.integer :duration
       t.text :description
+      t.belongs_to :type
 
       # t.belongs :from
       # t.integer :to

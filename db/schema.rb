@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
     t.string "price"
     t.string "date"
     t.integer "duration"
+    t.integer "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorites_on_user_id"
@@ -88,6 +89,14 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
     t.string "date"
     t.integer "duration"
     t.text "description"
+    t.bigint "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_id"], name: "index_travels_on_type_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
