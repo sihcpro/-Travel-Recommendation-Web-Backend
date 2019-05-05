@@ -1,3 +1,5 @@
 tmp/*
 log/*
 CARSKit.*/*
+*.txt
+*.log

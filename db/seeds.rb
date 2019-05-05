@@ -10,14 +10,16 @@
 require 'time'
 require 'csv'
 
-def build_user(amount=500)
+rate = 0.2
+
+def build_users(limit=500)
   puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
                                    password: "123456", gender: 0, role: 2).save
   puts 'Created Test'  if User.new(username: "test", email: "test",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
-  (1..amount).each do |n|
+  (1..limit).each do |n|
     print '.' if User.new(username: "user#{n}", email: "user#{n}@b.c",
                           password: "123456", gender: n%2, role: 0).save
   end
@@ -48,109 +50,108 @@ def build_types()
   puts ' ok'
 end
 
-def build_random_travel
+def build_tours()
+  rd = Random.new(Time.now.to_i)
   print('Create travels  : ')
   cities = City.all()
-  (0..(cities.size-1)).each do |start_id|
-    (0..(cities.size-1)).each do |destination_id|
-      next if start_id == destination_id
+  types = Type.select(:id).all()
+  (0..cities.size-1).each do |destination_index|
+    types.map{|i| i.id}.each do |type_id|
       # ['weekday', 'weekend'].each do |date|
       ['weekday'].each do |date|
-        if ['Đà Nẵng', 'Hồ Chí Minh',
-            'Hà Nội', 'Lâm Đồng'].include?(cities[destination_id])
-          rating = 5
-        else
-          rating = 4
+        rating = 5
+        price = (100 - destination_index + rd.rand(0..40) - 20) * 100000
+        if destination_index <= 10
+          price += 1000000
         end
-        price = (destination_id - start_id).abs * 200000 + 1000000
+        price = price.round(-5)
         if date == 'weekend'
           price = (price * 1.3).round(-5)
         end
-        duration = ((destination_id - start_id).abs * 0.25 + 1).round()
+        duration = (price / 2000000 + 1).round()
 
-        travel = Travel.new(title: cities[destination_id].name,
-                            price: price,
-                            rating: rating,
-                            date: date,
-                            duration: duration,
-                            description: 'Not yet')
-        print '-' if travel.save()
-        # puts travel.inspect
-        # puts travel.id
-        # puts 'Start: ' + cities[start_id].id.to_s
-        start = Start.new(travel_id: travel.id,
-                          city_id: cities[start_id].id)
-        print '=' if start.save()
-        # puts 'Destination: ' + cities[destination_id].name
-        destination = Destination.new(travel_id: travel.id,
-                                      city_id: cities[destination_id].id)
-        print '>' if destination.save()
+        travel = Travel.new(title: cities[destination_index].name,
+                           price: price,
+                           rating: rating,
+                           date: date,
+                           type_id: type_id,
+                           duration: duration,
+                           description: 'Not yet',)
+        print '.' if travel.save()
+        # start = Start.new(travel_id: travel.id,
+        #                   city_id: cities[start_id].id)
+        # print '=' if start.save()
+        print '>' if Destination.create(travel_id: travel.id,
+                                        city_id: cities[destination_index].id)
       end
     end
   end
   puts ' ok'
 end
 
-def build_random_comment(size=10)
+def get_random_comments()
+  random_comments = CSV.read("./db/comments.csv")
+  random_comments.map{|i| i[1] = i[1].to_i()}
+end
+
+
+def build_random_comments(size=10)
   rd = Random.new(Time.now.to_i)
-  random_comments = [
-    ["Rất thú vị", 5],
-    ["Tôi nhất định đi lần nữa", 5],
-    ["Vui lắm luôn :D", 5],
-    ["Tôi nghĩ chuyến đi này không hợp với lứa tuổi của tôi", 3],
-    ["Đau cả người", 3],
-    ["Thức ăn dỡ quá", 3],
-    ["Mệt quá chừng", 4],
-    ["Trời mưa suốt ngày", 3],
-    ["Chán", 2],
-    ["Tour khủng khiếp", 1],
-  ]
-  starts = Start.select('city_id').all.distinct.map{|i| i.city_id}
+
+  random_comments = get_random_comments()
+  destinations = Destination.select('city_id').all.distinct.map{|i| i.city_id}
   prices = ['expensive', 'reasonable', 'cheap']
-  # dates = ['weekday', 'weekend']
-  dates = ['weekday']
+  types = Type.all
   durations = Travel.select('duration').all.distinct.map{|i| i.duration}
-
   all_user = User.all
-  user = User.first
 
+  # user = User.first
+  puts destinations.size, prices.size, types.size, durations.size, all_user.size, random_comments.size
   print('Create comments: ')
+
   all_user.each do |user|
-    amount_of_travel = rd.rand(1..size)
+    amount_of_travel = rd.rand(1..[1,size].max)
     rd_a =   [rd.rand(1..5), rd.rand(1..5), rd.rand(1..5), rd.rand(1..5)]
     bool_a = [rd_a[0] > 1  , rd_a[1] > 2  , rd_a[2] > 3  , rd_a[3] > 4  ]
-    #         starts       , prices       , date         , duration
+    #         starts       , prices       , types         , duration
     user_characteristics = {
-      'start': bool_a[0],
+      'destination': bool_a[0],
       'price': bool_a[1],
-      'date': bool_a[2],
+      'type': bool_a[2],
       'duration': bool_a[3]
     }
     dict_size_of_travel = {}
 
-    # puts bool_a
+    # puts random_comments.size
 
-    start = rd.rand(1..(starts.size))
-    date  = dates[rd.rand(0..(dates.size-1))]
+    destination = destinations[rd.rand(0..(destinations.size-1))]
+    type  = types[rd.rand(0..(types.size-1))]
     price = prices[rd.rand(0..(prices.size-1))]
     duration = durations[rd.rand(0..(durations.size-1))]
 
+    puts '?'
+
     cnt = 0
     while(cnt < amount_of_travel)
-      if !user_characteristics['start']
-        start = rd.rand(1..(starts.size))
+      cnt = 100000
+      if !user_characteristics['destination']
+        destination = destinations[rd.rand(0..(destinations.size-1))]
       end
 
-      comment = random_comments[rd.rand(0..random_comments.size-1)]
+      puts '?', destination, destinations[destination]
+      comment = random_comments[rd.rand(0..(random_comments.size-1))]
 
       # using dict to save reues value
-      if !dict_size_of_travel[start]
-        dict_size_of_travel[start] = City.find_by(id: start).travel.size
+      if !dict_size_of_travel[destination]
+        dict_size_of_travel[destination] = City.find_by(id: destination).travel.size
       end
+      puts '?'
 
-      if user_characteristics['date']
+      if user_characteristics['type']
+        puts '?'
+
         if user_characteristics['duration']
-          travels = City.find_by(id: start).travel.where(date: date, duration: duration)
+          travels = City.find_by(id: destination).travel.where(type: type, duration: duration)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -159,7 +160,7 @@ def build_random_comment(size=10)
             end
           end
         else
-          travels = City.find_by(id: start).travel.where(date: date)
+          travels = City.find_by(id: destination).travel.where(type: type)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -169,8 +170,10 @@ def build_random_comment(size=10)
           end
         end
       else
+        puts '!'
         if user_characteristics['duration']
-          travels = City.find_by(id: start).travel.where(duration: duration)
+          puts '!'
+          travels = City.find_by(id: destination).travel.where(duration: duration)
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -179,9 +182,13 @@ def build_random_comment(size=10)
             end
           end
         else
-          travels = City.find_by(id: start).travel
+          puts '~'
+          travels = City.find_by(id: destination).travel
+          puts '~'
           (1..3).each do |i|
+            puts '~'
             travel = travels[rd.rand(0..(travels.size-1))]
+            puts '~'
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
               cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
@@ -259,29 +266,29 @@ end
 
 
 
-# if !User.first
-#   build_user()
-# end
+if !User.first
+  build_users((1000 * rate).round())
+end
 
-# if !City.first
-#   build_cities(30)
-# end
+if !City.first
+  build_cities((63 * rate).round())
+end
 
 if !Type.first
   build_types()
 end
 
-# if !Travel.first
-#   build_random_travel()
-# end
+if !Travel.first
+  build_tours()
+end
 
-# if !Comment.first
-#   build_random_comment()
-# end
+if !Comment.first
+  build_random_comments((10 * rate).round())
+end
 
 # system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-# build_suggestions()
+build_suggestions()
 
 
 
