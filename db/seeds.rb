@@ -14,14 +14,14 @@ rate = 0.2
 
 def build_users(limit=500)
   puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
-                                   password: "123456", gender: 0, role: 2).save
+                                   password: "123456", gender: 0, role: 0).save
   puts 'Created Test'  if User.new(username: "test", email: "test",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
   (1..limit).each do |n|
     print '.' if User.new(username: "user#{n}", email: "user#{n}@b.c",
-                          password: "123456", gender: n%2, role: 0).save
+                          password: "123456", gender: n%2, role: 2).save
   end
   puts 'ok'
 end

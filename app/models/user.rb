@@ -8,11 +8,11 @@ class User < ApplicationRecord
 
   validates_presence_of :password, :on => :create
   enum role: ['Admin', 'Dev', 'User']
-  enum gender: ['Nam', 'Nữ', 'Ngại quá à']
+  enum gender: ['Nam', 'Nữ', 'Không']
 
 
-  has_many :histories
   has_one :favorite
+  has_many :histories
   has_many :suggestions
   has_many :comments
 
