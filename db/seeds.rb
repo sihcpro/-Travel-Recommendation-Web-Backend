@@ -129,69 +129,59 @@ def build_random_comments(size=10)
     price = prices[rd.rand(0..(prices.size-1))]
     duration = durations[rd.rand(0..(durations.size-1))]
 
-    puts '?'
-
     cnt = 0
     while(cnt < amount_of_travel)
-      cnt = 100000
+      # cnt = 100000
       if !user_characteristics['destination']
         destination = destinations[rd.rand(0..(destinations.size-1))]
       end
 
-      puts '?', destination, destinations[destination]
       comment = random_comments[rd.rand(0..(random_comments.size-1))]
 
       # using dict to save reues value
       if !dict_size_of_travel[destination]
         dict_size_of_travel[destination] = City.find_by(id: destination).travel.size
       end
-      puts '?'
 
       if user_characteristics['type']
-        puts '?'
 
         if user_characteristics['duration']
-          travels = City.find_by(id: destination).travel.where(type: type, duration: duration)
+          travels = Destination.joins(:travel).where(city_id: destination, type: type, duration: duration).select("destinations.travel_id")
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
             end
           end
         else
-          travels = City.find_by(id: destination).travel.where(type: type)
+          travels = Destination.joins(:travel).where(city_id: destination, type: type).select("destinations.travel_id")
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
             end
           end
         end
       else
-        puts '!'
         if user_characteristics['duration']
-          puts '!'
-          travels = City.find_by(id: destination).travel.where(duration: duration)
+          travels = Destination.joins(:travel).where(city_id: destination, duration: duration).select("destinations.travel_id")
+          next if !travels
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
             end
           end
         else
-          puts '~'
-          travels = City.find_by(id: destination).travel
-          puts '~'
+          travels = Destination.where(city_id: destination).select("destinations.travel_id")
           (1..3).each do |i|
-            puts '~'
             travel = travels[rd.rand(0..(travels.size-1))]
-            puts '~'
             if !user_characteristics['price'] || 
               (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.id, rating: comment[1], content: comment[0])
+              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
             end
           end
         end
