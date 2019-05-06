@@ -1,9 +1,34 @@
 class TravelsController < ApplicationController
   def create
+    user = current_user
+    travel = Travel.new(travel_create_params)
+    travel.rating = 5
+    render json:  if user.role == 'Admin'
+                    if travel.save
+                      {
+                        travel: travel,
+                        message: Success,
+                        status: 200
+                      }
+                    else
+                      {
+                        travel: travel,
+                        message: 'Fail',
+                        error: travel.errors.full_messages,
+                        status: 406
+                      }
+                    end
+                  else
+                    {
+                      message: "User isn't Admin",
+                      status: 405
+                    }
+                  end
   end
 
   def show
     @travel = Travel.find_by(travel_id_param)
+    @type = TravelType.joins(:type).where(travel_id: params[:id]).select("types.name").map{ |i| i.name}
     render json:  if @travel
                     @destinations = Destination.joins(:city).select("cities.name as destination").where(travel_id: params[:id]).map{|i| i.destination}
                     {
@@ -13,6 +38,7 @@ class TravelsController < ApplicationController
                       duration: @travel.duration,
                       rating: @travel.rating,
                       price: @travel.price,
+                      type: @type,
                       # start: @travel.start_name,
                       destinations: @destinations,
                       description: @travel.description,
@@ -93,6 +119,10 @@ class TravelsController < ApplicationController
   end
 
   def travel_update_params
+    params.permit(:title, :description, :price, :duration)
+  end
+
+  def travel_create_params
     params.permit(:title, :description, :price, :duration)
   end
 end
