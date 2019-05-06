@@ -1,0 +1,2 @@
+module TravelTypesHelper
+end

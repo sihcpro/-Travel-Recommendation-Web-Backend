@@ -74,15 +74,14 @@ def build_tours()
                            price: price,
                            rating: rating,
                            date: date,
-                           type_id: type_id,
+                           # type_id: type_id,
                            duration: duration,
                            description: 'Not yet',)
         print '.' if travel.save()
-        # start = Start.new(travel_id: travel.id,
-        #                   city_id: cities[start_id].id)
-        # print '=' if start.save()
+        print '=' if TravelType.create(travel_id: travel.id,
+                                       type_id: type_id,)
         print '>' if Destination.create(travel_id: travel.id,
-                                        city_id: cities[destination_index].id)
+                                        city_id: cities[destination_index].id,)
       end
     end
   end
@@ -139,14 +138,14 @@ def build_random_comments(size=10)
       comment = random_comments[rd.rand(0..(random_comments.size-1))]
 
       # using dict to save reues value
-      if !dict_size_of_travel[destination]
-        dict_size_of_travel[destination] = City.find_by(id: destination).travel.size
-      end
+      # if !dict_size_of_travel[destination]
+      #   dict_size_of_travel[destination] = City.find_by(id: destination).travel.size
+      # end
 
       if user_characteristics['type']
 
         if user_characteristics['duration']
-          travels = Destination.joins(:travel).where(city_id: destination, type: type, duration: duration).select("destinations.travel_id")
+          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travel_types.type_id" => type, "travels.duration" => duration).select("destinations.travel_id")
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -155,7 +154,7 @@ def build_random_comments(size=10)
             end
           end
         else
-          travels = Destination.joins(:travel).where(city_id: destination, type: type).select("destinations.travel_id")
+          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travel_types.type_id" => type).select("destinations.travel_id")
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
             if !user_characteristics['price'] || 
@@ -166,7 +165,7 @@ def build_random_comments(size=10)
         end
       else
         if user_characteristics['duration']
-          travels = Destination.joins(:travel).where(city_id: destination, duration: duration).select("destinations.travel_id")
+          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travels.duration" => duration).select("destinations.travel_id")
           next if !travels
           (1..3).each do |i|
             travel = travels[rd.rand(0..(travels.size-1))]
@@ -276,7 +275,7 @@ if !Comment.first
   build_random_comments((10 * rate).round())
 end
 
-# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
 build_suggestions()
 

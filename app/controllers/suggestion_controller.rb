@@ -12,6 +12,6 @@ class SuggestionController < ApplicationController
                       message: 'User don\'t have any suggestions',
                       status: 204
                     }
-    end
+                  end
   end
 end

@@ -82,6 +82,15 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
     t.index ["user_id"], name: "index_suggestions_on_user_id"
   end
 
+  create_table "travel_types", force: :cascade do |t|
+    t.bigint "travel_id"
+    t.bigint "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["travel_id"], name: "index_travel_types_on_travel_id"
+    t.index ["type_id"], name: "index_travel_types_on_type_id"
+  end
+
   create_table "travels", force: :cascade do |t|
     t.string "title"
     t.float "price"
