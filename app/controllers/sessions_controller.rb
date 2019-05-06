@@ -3,7 +3,13 @@ class SessionsController < ApplicationController
     @user = User.find_by(email_params)
     message = if @user && @user.authenticate(params[:password])
                 @user.update_columns(auth_token: SecureRandom.hex)
-                { id: @user.id, auth_token: @user.auth_token, username: @user.username, status: 200 }
+                { 
+                  id: @user.id,
+                  auth_token: @user.auth_token,
+                  username: @user.username,
+                  role: @user.role,
+                  status: 200
+                }
               else
                 { message: 'Invalid email/password', status: 404 }
               end
