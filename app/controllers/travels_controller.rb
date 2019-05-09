@@ -3,7 +3,7 @@ class TravelsController < ApplicationController
     user = current_user
     travel = Travel.new(travel_create_params)
     travel.rating = 5
-    render json:  if user.role == 'Admin'
+    render json:  if user.role == 'admin'
                     if travel.save
                       {
                         travel: travel,
@@ -32,16 +32,10 @@ class TravelsController < ApplicationController
     render json:  if @travel
                     @destinations = Destination.joins(:city).select("cities.name as destination").where(travel_id: params[:id]).map{|i| i.destination}
                     {
-                      id: @travel.id,
-                      title: @travel.title,
-                      date: @travel.date,
-                      duration: @travel.duration,
-                      rating: @travel.rating,
-                      price: @travel.price,
+                      travel: @travel,
                       type: @type,
                       # start: @travel.start_name,
                       destinations: @destinations,
-                      description: @travel.description,
                       status: 201
                     }
                   else
@@ -54,7 +48,7 @@ class TravelsController < ApplicationController
   def update
     user = current_user
     @travel = Travel.find_by(travel_id_param)
-    render json:  if user.role == 'Admin'
+    render json:  if user.role == 'admin'
                     if @travel
                       if @travel.update(travel_update_params)
                         {
@@ -84,9 +78,8 @@ class TravelsController < ApplicationController
 
   def destroy
     user = current_user
-    user.role == 'Admin'
     @travel = Travel.find_by(travel_id_param)
-    render json:  if user.role == 'Admin'
+    render json:  if user.role == 'admin'
                     if @travel
                       if @travel.delete()
                         {

@@ -1,0 +1,2 @@
+class PriceStep < ApplicationRecord
+end

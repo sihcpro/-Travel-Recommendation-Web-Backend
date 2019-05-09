@@ -1,5 +1,5 @@
 class Travel < ApplicationRecord
-    validates :title, :price, presence: true
+    validates :title, presence: true
 
     # has_one :start
     # has_one :city, through: :start

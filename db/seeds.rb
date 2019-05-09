@@ -50,6 +50,17 @@ def build_types()
   puts ' ok'
 end
 
+def build_price_steps()
+  price_steps = CSV.read("./db/price_steps.csv")
+  print 'Create PriceStep: '
+  cnt = 0
+  for row in price_steps
+    cnt += 1
+    print '.' if PriceStep.create(name: row[0])
+  end
+  puts ' ok'
+end
+
 def build_tours()
   rd = Random.new(Time.now.to_i)
   print('Create travels  : ')
@@ -249,10 +260,31 @@ def build_suggestions
 end
 
 
-
-
-
-
+def build_travel_manual()
+  locations = CSV.read("./db/location_sheet.csv")
+  print 'Create locations: '
+  for row in locations
+    travel = Travel.new(title: row[0],
+                        lower_price: row[1],
+                        upper_price: row[2],
+                        address: row[3],
+                        location: row[4],
+                        link: row[5],
+                        description: row[8],
+                        rating: 5,)
+    print '.' if travel.save
+    for type in row[6].split(" ").map{ |i| i.to_i }
+      print '=' if TravelType.create(travel_id: travel.id, type_id: type)
+    end
+    destination = City.find_by(name: row[7])
+    if destination
+      print Destination.create(travel_id: travel.id, city_id: destination.id) ? '>' : '?'
+    else
+      print '!'
+    end
+  end
+  puts ' ok'
+end
 
 
 if !User.first
@@ -267,17 +299,21 @@ if !Type.first
   build_types()
 end
 
+if !PriceStep.first
+  build_price_steps()
+end
+
 if !Travel.first
-  build_tours()
+  build_travel_manual()
 end
 
-if !Comment.first
-  build_random_comments((10 * rate).round())
-end
+# if !Comment.first
+#   build_random_comments((10 * rate).round())
+# end
 
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-build_suggestions()
+# build_suggestions()
 
 
 

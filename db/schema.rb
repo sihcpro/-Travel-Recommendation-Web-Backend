@@ -63,6 +63,12 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
     t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
+  create_table "price_steps", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "starts", force: :cascade do |t|
     t.bigint "travel_id"
     t.bigint "city_id"
@@ -93,15 +99,15 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
 
   create_table "travels", force: :cascade do |t|
     t.string "title"
-    t.float "price"
+    t.string "lower_price"
+    t.string "upper_price"
+    t.string "address"
+    t.string "location"
+    t.string "link"
     t.float "rating"
-    t.string "date"
-    t.integer "duration"
     t.text "description"
-    t.bigint "type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["type_id"], name: "index_travels_on_type_id"
   end
 
   create_table "types", force: :cascade do |t|

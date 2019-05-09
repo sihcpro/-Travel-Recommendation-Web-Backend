@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # validate  :birthday?
 
   validates_presence_of :password, :on => :create
-  enum role: ['Admin', 'Dev', 'User']
+  enum role: ['admin', 'dev', 'user']
   enum gender: ['Nam', 'Nữ', 'Không']
 
 
