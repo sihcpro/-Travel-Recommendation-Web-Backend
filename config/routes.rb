@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :search, only: :show
 
+  resource :backup, only: %i[create update destroy]
+
   post '/login', to: 'sessions#create', as: 'login'
   post '/logout', to: 'sessions#destroy', as: 'logout'
 end

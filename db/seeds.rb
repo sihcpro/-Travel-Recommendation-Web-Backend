@@ -314,7 +314,7 @@ end
 
 # system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-# build_suggestions()
+build_suggestions()
 
 
 
