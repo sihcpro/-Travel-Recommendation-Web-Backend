@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_170629) do
 
   create_table "travels", force: :cascade do |t|
     t.string "title"
-    t.string "lower_price"
-    t.string "upper_price"
+    t.integer "lower_price"
+    t.integer "upper_price"
     t.string "address"
     t.string "location"
     t.string "link"

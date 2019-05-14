@@ -2,8 +2,8 @@ class CreateTravels < ActiveRecord::Migration[5.2]
   def change
     create_table :travels do |t|
       t.string :title
-      t.string :lower_price
-      t.string :upper_price
+      t.integer :lower_price
+      t.integer :upper_price
       t.string :address
       t.string :location
       t.string :link

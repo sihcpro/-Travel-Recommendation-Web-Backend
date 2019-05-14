@@ -265,8 +265,8 @@ def build_travel_manual()
   print 'Create locations: '
   for row in locations
     travel = Travel.new(title: row[0],
-                        lower_price: row[1],
-                        upper_price: row[2],
+                        lower_price: row[1].to_i,
+                        upper_price: row[2].to_i,
                         address: row[3],
                         location: row[4],
                         link: row[5],
@@ -281,6 +281,7 @@ def build_travel_manual()
       print Destination.create(travel_id: travel.id, city_id: destination.id) ? '>' : '?'
     else
       print '!'
+      print row[7]
     end
   end
   puts ' ok'
@@ -292,7 +293,7 @@ if !User.first
 end
 
 if !City.first
-  build_cities((63 * rate).round())
+  build_cities()
 end
 
 if !Type.first
