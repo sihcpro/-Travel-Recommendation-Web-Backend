@@ -1,4 +1,4 @@
-class SearchsController < ApplicationController
+class SearchesController < ApplicationController
   # def show
   #   # Travel.joins(:start => :city).select("travels.id as travel_id").first.travel_id
   #   @destinations_name = Destination.joins(:city
@@ -36,8 +36,14 @@ class SearchsController < ApplicationController
   # end
 
   def show
+    @travel = Travel.where("rating >= #{params[:rating]} and lower_price >=
+      #{params[:lower_price]} and upper_price <= #{params[:upper_price]}").select(:id).map { |i| i.id }
+    render json:  {
+      travels: @travel
+    }
   end
 
   def search_params
     params.permit(:rating, :lower_price, :upper_price, :type)
+  end
 end

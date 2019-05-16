@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :suggestion, only: :show
   resources :favorite, only: :show
 
-  resources :search, only: :show
+  resource :search, only: :show
 
   resource :backup, only: %i[create update destroy]
 
