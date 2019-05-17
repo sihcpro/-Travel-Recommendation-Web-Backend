@@ -36,10 +36,10 @@ class SearchesController < ApplicationController
   # end
 
   def show
-    @travel = Travel.where("rating >= #{params[:rating]} and lower_price >=
-      #{params[:lower_price]} and upper_price <= #{params[:upper_price]}").select(:id).map { |i| i.id }
+    puts params[:type]
+    @travel = Travel.joins(:travel_types).where("rating >= #{params[:rating]} AND lower_price >= #{params[:lower_price]} AND upper_price <= #{params[:upper_price]}").where("travel_types.type_id in (#{params[:type]})").select(:id).distinct.map { |i| i.id }
     render json:  {
-      travels: @travel
+      suggestions: @travel
     }
   end
 
