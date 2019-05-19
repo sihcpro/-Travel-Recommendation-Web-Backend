@@ -236,10 +236,10 @@ def build_suggestions
         favorite_map[title] = value
       end
       if !Favorite.find_by(user_id: user_id)
-        favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
-                                date: favorite_map['date'],
-                                duration: favorite_map['duration'].to_s.to_i)
-        print '>' if favorite.save()
+        # favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
+        #                         date: favorite_map['date'],
+        #                         duration: favorite_map['duration'].to_s.to_i)
+        # print '>' if favorite.save()
         # puts favorite.inspect
 
         suggestions.each do |item|

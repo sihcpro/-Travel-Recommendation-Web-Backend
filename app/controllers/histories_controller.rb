@@ -8,7 +8,7 @@ class HistoriesController < ApplicationController
   end
 
   def save_result(histories)
-    File.open('result.csv', "w+") do |f|
+    File.open('result.csv', 'w+') do |f|
       f.write("\
 userId,itemId,\
 rating,Start,\
@@ -27,20 +27,16 @@ Date,Duration,\
   end
 
   def check(str)
-    if str
-      return str
-    else
-      return 'NA'
-    end
+    str || 'NA'
   end
 
   def classify_price(price)
     if price > 10000000
-      return 'expensive'
+      'expensive'
     elsif price > 5000000
-      return 'reasonable'
+      'reasonable'
     else
-      return 'cheap'
+      'cheap'
     end
   end
 end

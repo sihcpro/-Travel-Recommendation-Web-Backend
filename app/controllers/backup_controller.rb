@@ -1,10 +1,10 @@
 class BackupController < ApplicationController
   def create
-    message = "Export all comments to file: "
+    message = 'Export all comments to file: '
 
     filepath = File.join(Rails.root, 'db', 'backup_comments.json')
     # get a file ready, the 'data' directory has already been added in Rails.root
-    message = message + "#{filepath}"
+    message += filepath.to_s
 
     require 'json'
     comments = Comment.all.as_json
@@ -20,10 +20,7 @@ class BackupController < ApplicationController
   def update
     filepath = File.join(Rails.root, 'db', 'backup_comments.json')
 
-    unless File.exist?(filepath)
-      puts "Input file not found: #{filepath}" 
-      message = "Input file not found: #{filepath}"
-    else
+    if File.exist?(filepath)
       require 'json'
       comments = JSON.parse(File.read(filepath))
 
@@ -31,22 +28,25 @@ class BackupController < ApplicationController
         Comment.create(comment)
       end
       message = "Load finish comments at #{filepath}"
+    else
+      puts "Input file not found: #{filepath}"
+      message = "Input file not found: #{filepath}"
     end
     render json: { message: message }
   end
 
   def destroy
     filepath = File.join(Rails.root, 'db', 'backup_comments.json')
-    unless File.exist?(filepath)
-      puts "Input file not found: #{filepath}" 
-      message = "Input file not found: #{filepath}"
-    else
+    if File.exist?(filepath)
       File.open(filepath, 'w') do |f|
-        f.write("")
+        f.write('')
       end
       message = "Destroy backup comments file at #{filepath}"
+    else
+      puts "Input file not found: #{filepath}"
+      message = "Input file not found: #{filepath}"
     end
 
-    render json: { message: message}
+    render json: { message: message }
   end
 end

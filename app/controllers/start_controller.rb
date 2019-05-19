@@ -1,10 +1,10 @@
 class StartController < ApplicationController
   def show
-    if params[:id].match(/\d+/)
-      @travels = City.find_by(id: params[:id]).travel()
-    else
-      @travels = City.find_by(name: params[:id]).travel()
-    end
+    @travels = if /\d+/.match?(params[:id])
+                 City.find_by(id: params[:id]).travel
+               else
+                 City.find_by(name: params[:id]).travel
+               end
 
     render json: {
       travels: @travels,

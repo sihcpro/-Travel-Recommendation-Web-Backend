@@ -6,16 +6,14 @@ class User < ApplicationRecord
   before_create { generate_token(:auth_token) }
   # validate  :birthday?
 
-  validates_presence_of :password, :on => :create
-  enum role: ['admin', 'dev', 'user']
-  enum gender: ['Nam', 'Nữ', 'Không']
-
+  validates_presence_of :password, on: :create
+  enum role: %w[admin dev user]
+  enum gender: %w[Nam Nữ Không]
 
   has_one :favorite
   has_many :histories
   has_many :suggestions
   has_many :comments
-
 
   def generate_token(column)
     begin
