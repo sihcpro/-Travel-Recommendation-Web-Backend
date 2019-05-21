@@ -39,18 +39,41 @@ class UsersController < ApplicationController
     user = current_user
     message = if user
                 if user.update(user_update_params)
-                  {
-                    user: user,
-                    message: 'Accepted',
-                    status: 202
-                  }
+                  FavoriteType.where(user_id: user.id).destroy_all
+                  save_all = true
+                  new_favorite_array().each do |favorite|
+                    favorite = FavoriteType.new(user_id: user.id, type_id: favorite)
+                    unless favorite.save
+                      save_all = false
+                      errors = favorite.errors.full_messages
+                    end
+                  end
+                  if save_all
+                    {
+                      user: user,
+                      message: 'Success',
+                      status: 202
+                    }
+                  else
+                    {
+                      user: user,
+                      message: 'Failed',
+                      message_user: 'Success',
+                      message_favorites: 'Failt',
+                      errors: errors,
+                      status: 400
+                    }
+                  end
                 else
-                  { message: 'Failed', status: 406 }
+                  {
+                    message: 'Failed',
+                    errors: user.errors.full_messages,
+                    status: 406
+                  }
                 end
               else
                 { message: 'Not found', status: 404 }
               end
-    message['errors'] = user.errors.full_messages
     render json: message
   end
 
@@ -74,5 +97,9 @@ class UsersController < ApplicationController
 
   def user_update_params
     params.permit(:username, :gender)
+  end
+
+  def new_favorite_array
+    params[:favorites].split(',')
   end
 end

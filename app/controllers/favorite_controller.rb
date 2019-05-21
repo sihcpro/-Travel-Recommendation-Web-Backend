@@ -27,8 +27,8 @@ class FavoriteController < ApplicationController
     @user = User.find_by(id: params[:id])
     if @user
       save_all = true
-      new_favorite_array.each do |favorite|
-        favorite = FavoriteType.new(user_id: params[:user_id], favorite: favorite)
+      new_favorite_array().each do |favorite|
+        favorite = FavoriteType.new(user_id: params[:user_id], type_id: favorite)
         save_all = false unless favorite.save
         errors = favorite.errors.full_messages
       end

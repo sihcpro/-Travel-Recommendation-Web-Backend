@@ -9,4 +9,8 @@ class Travel < ApplicationRecord
   has_many :comments
   has_many :travel_types
   has_many :types, through: :travel_type
+
+  def update_rating(travel_id)
+    # TravelComment.where()
+  end
 end

@@ -235,7 +235,7 @@ def build_suggestions
         value = item.match(/[\w ]+;/u).to_s.chomp(";")
         favorite_map[title] = value
       end
-      if !Favorite.find_by(user_id: user_id)
+      if !Suggestion.find_by(user_id: user_id)
         # favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
         #                         date: favorite_map['date'],
         #                         duration: favorite_map['duration'].to_s.to_i)
@@ -253,6 +253,7 @@ def build_suggestions
           # break
         end
       end
+      print '>'
     end
     puts ' ok'
   end
@@ -288,6 +289,43 @@ def build_travel_manual()
 end
 
 
+def build_comments
+  comments = CSV.read("./db/Comment.csv")
+  print 'Create comments : '
+  line = 0
+  for row in comments
+    line += 1
+    next if line == 1
+    print '.' if Comment.create(travel_id: row[0].to_i,
+                                user_id: row[1].to_i,
+                                rating: row[2].to_i,
+                                content: row[3],)
+  end
+  puts ' ok'
+end
+
+def build_favorite_types
+  favorites = CSV.read("./db/UserFavorite.csv")
+  print 'Create favorites: '
+  line = 0
+  for row in favorites
+    line += 1
+    next if line == 1
+    row[1].split(' ').each do |type|
+      print '.' if FavoriteType.create(user_id: row[0].to_i,
+                                  type_id: type,)
+    end
+    print '>'
+  end
+  puts ' ok'
+end
+
+
+
+
+
+
+
 if !User.first
   build_users((1000 * rate).round())
 end
@@ -306,6 +344,14 @@ end
 
 if !Travel.first
   build_travel_manual()
+end
+
+if !Comment.first
+  build_comments()
+end
+
+if !FavoriteType.first
+  build_favorite_types()
 end
 
 # if !Comment.first

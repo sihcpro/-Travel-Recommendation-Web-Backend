@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :start, only: :show
   # resources :history, only: :show
 
-  resources :suggestion, only: :show
+  resource :suggestion, only: :show
   resource :favorite, only: %i[show create]
 
   resource :search, only: :show
