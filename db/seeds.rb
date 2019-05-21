@@ -15,7 +15,7 @@ rate = 0.2
 def build_users(limit=500)
   puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
                                    password: "123456", gender: 0, role: 0).save
-  puts 'Created Test'  if User.new(username: "test", email: "test",
+  puts 'Created Test'  if User.new(username: "test", email: "test@gmail.com",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
