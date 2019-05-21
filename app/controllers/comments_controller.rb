@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_create_params)
     render json: if @comment.save
+                   @comment.travel.update_rating
                    {
                      message: 'Create success',
                      status: 201

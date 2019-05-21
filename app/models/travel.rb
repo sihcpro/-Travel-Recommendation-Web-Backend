@@ -10,7 +10,8 @@ class Travel < ApplicationRecord
   has_many :travel_types
   has_many :types, through: :travel_type
 
-  def update_rating(travel_id)
-    # TravelComment.where()
+  def update_rating
+    rate = ActiveRecord::Base.connection.execute("SELECT SUM(comments.rating) AS total, count(*) AS count FROM comments WHERE comments.travel_id = #{self.id} GROUP BY comments.travel_id")
+    return self.update(rating: rate.first["total"] * 1.0 / rate.first["count"])
   end
 end

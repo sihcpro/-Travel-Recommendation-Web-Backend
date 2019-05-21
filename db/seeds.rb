@@ -320,7 +320,13 @@ def build_favorite_types
   puts ' ok'
 end
 
-
+def update_rating_all_travels
+  print 'Update rating   : '
+  Travel.all.each do |travel|
+    print '.' if travel.update_rating
+  end
+  puts '>'
+end
 
 
 
@@ -353,6 +359,8 @@ end
 if !FavoriteType.first
   build_favorite_types()
 end
+
+update_rating_all_travels()
 
 # if !Comment.first
 #   build_random_comments((10 * rate).round())
