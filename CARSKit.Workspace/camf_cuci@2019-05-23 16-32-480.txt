@@ -1,7 +1,7 @@
 WorkingPath: ./CARSKit.Workspace/
 Your original rating data path: ./result.csv
 Current working path: ./CARSKit.Workspace/
-User, Item, Rating, price:1:0, price:1:1, price:2:1, price:2:0, price:3:1, price:3:0, price:4:1, price:4:0, price:5:0, price:5:1, tâm linh:1, tâm linh:0, di tích:1, di tích:0, tham quan:1, tham quan:0, thắng cảnh:0, thắng cảnh:1, ẩm thực:0, ẩm thực:1, giải trí:0, giải trí:1, nghỉ dưỡng:0, nghỉ dưỡng:1, mạo hiểm:0, mạo hiểm:1, hồ sông suối:0, hồ sông suối:1, đô thị:0, đô thị:1, nông thôn:0, nông thôn:1, đồi núi:0, đồi núi:1, biển:0, biển:1, rừng:0, rừng:1
+User, Item, Rating, price:1:0, price:1:1, price:2:1, price:2:0, price:3:1, price:3:0, price:4:1, price:4:0, price:5:0, price:5:1, tâm linh:0, tâm linh:1, di tích:0, di tích:1, tham quan:0, tham quan:1, thắng cảnh:0, thắng cảnh:1, ẩm thực:1, ẩm thực:0, giải trí:1, giải trí:0, nghỉ dưỡng:0, nghỉ dưỡng:1, mạo hiểm:1, mạo hiểm:0, hồ sông suối:0, hồ sông suối:1, đô thị:0, đô thị:1, nông thôn:0, nông thôn:1, đồi núi:0, đồi núi:1, biển:0, biển:1, rừng:0, rừng:1
 Data transformaton completed (from Compact to Binary format). See new rating file: ./CARSKit.Workspace/train.csv
 Dataset: ./CARSKit.Workspace/train.csv
 DataPath: ./CARSKit.Workspace/train.csv
@@ -14,16 +14,18 @@ Rating data set has been successfully loaded.
  * Statistics of U-I-C Matrix:
  * User amount: 101
  * Item amount: 53
- * Rate amount: 1028
+ * Rate amount: 1019
  * Context dimensions: 15 (price, tâm linh, di tích, tham quan, thắng cảnh, ẩm thực, giải trí, nghỉ dưỡng, mạo hiểm, hồ sông suối, đô thị, nông thôn, đồi núi, biển, rừng)
  * Context conditions: 38 (price: 10, tâm linh: 2, di tích: 2, tham quan: 2, thắng cảnh: 2, ẩm thực: 2, giải trí: 2, nghỉ dưỡng: 2, mạo hiểm: 2, hồ sông suối: 2, đô thị: 2, nông thôn: 2, đồi núi: 2, biển: 2, rừng: 2)
- * Context situations: 13
+ * Context situations: 32
  * Data density: 0.0001%
- * Scale distribution: [1.0 x 156, 4.0 x 248, 2.0 x 144, 5.0 x 221, 3.0 x 259]
- * Average value of all ratings: 3.227627
- * Standard deviation of all ratings: 1.340312
+ * Scale distribution: [2.0 x 142, 4.0 x 244, 1.0 x 156, 5.0 x 218, 3.0 x 259]
+ * Average value of all ratings: 3.221786
+ * Standard deviation of all ratings: 1.340791
  * Mode of all rating values: 3.000000
  * Median of all rating values: 3.000000
  *
  **********************************************************************************************************************************************************************************************************************/
 With Setup: cv -k 5 -p on --rand-seed 1 --test-view all
+Final Results by CAMF_CUCI, Pre5: 0.025641,Pre10: 0.024376, Pre1000: 0.001037, Rec5: 0.125474, Rec10: 0.238350, Rec1000: 1.000000, AUC5: 0.501782, AUC10: 0.504908, AUC1000: 0.507036, MAP5: 0.059765, MAP10: 0.074541, MAP1000: 0.103539, NDCG5: 0.076255, NDCG10: 0.112651,NDCG1000: 0.270483,MRR5: 0.061140, MRR10: 0.076248,MRR1000: 0.104870, numFactors: 10, numIter: 1000, lrate: 0.02, maxlrate: -1.0, regB: 1.0E-4, regU: 1.0E-4, regI: 1.0E-4, regC: 0.001, isBoldDriver: true, Time: '00:13','00:00'
+

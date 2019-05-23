@@ -212,56 +212,54 @@ def classify_price(price)
   end
 end
 
-def build_suggestions
-  # suggestions = 
-  puts 'Create suggestion: '
-
+def get_all_suggestions
+  all_suggestions = {}
   (1..5).each do |i|
     line_number = 0
-    print "-> #{i} : "
     File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [#{i}].txt").each do |line|
       line_number += 1
       next if line_number == 1
       user_id = line.match(/[\d]+/).to_s.to_i
-      favorites = line.scan(/[\w ]+:[\w ]+;/u)
+
       suggestions = line.scan(/\([^\(]+\)/)
-      # puts user_id
-      # puts favorites
-      # puts suggestions
+      suggestions.each do |item|
+        travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
+        rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
 
-      favorite_map = {}
-      favorites.each do |item|
-        title = item.match(/[\w ]+:/u).to_s.chomp(":")
-        value = item.match(/[\w ]+;/u).to_s.chomp(";")
-        favorite_map[title] = value
-      end
-      if !Suggestion.find_by(user_id: user_id)
-        # favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
-        #                         date: favorite_map['date'],
-        #                         duration: favorite_map['duration'].to_s.to_i)
-        # print '>' if favorite.save()
-        # puts favorite.inspect
-
-        suggestions.each do |item|
-          travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
-          rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
-
-          suggestion = Suggestion.new(user_id: user_id, travel_id: travel_id,
-                                      rate: rate)
-
-          print '.' if suggestion.save()
-          # break
+        # puts 1
+        # puts user_id
+        # puts all_suggestions[user_id]
+        if all_suggestions[user_id] == nil
+          # puts 2
+          all_suggestions[user_id] = [[travel_id, rate]]
+        else
+          # puts 3
+          all_suggestions[user_id] += [[travel_id, rate]]
         end
       end
-      print '>'
     end
-    puts ' ok'
+  end
+  all_suggestions
+end
+
+def build_suggestions
+  all_suggestions = get_all_suggestions()
+  puts 'Create suggestion: '
+
+  all_suggestions.each do |user_id, user_suggestions|
+    print user_id
+    user_suggestions[0..18].each do |suggestion|
+      print '.' if Suggestion.create(user_id: user_id,
+                                     travel_id: suggestion[0],
+                                     rate: suggestion[1])
+    end
+    print '> '
   end
   puts 'Suggestion done'
 end
 
 
-def build_travel_manual()
+def build_travel_manual
   locations = CSV.read("./db/location_sheet.csv")
   print 'Create locations: '
   for row in locations
@@ -331,72 +329,9 @@ end
 def export_all_comments
   print 'Export result   : '
   File.open('result.csv', 'w+') do |f|
-    f.write("\
-userId,\
-itemId,\
-rating,\
-price:1,\
-price:2,\
-price:3,\
-price:4,\
-price:5,\
-Tâm linh,\
-Di tích,\
-Tham quan,\
-Thắng cảnh,\
-Ẩm thực,\
-Giải trí,\
-Nghỉ dưỡng,\
-Mạo hiểm,\
-Hồ sông suối,\
-Đô thị,\
-Nông thôn,\
-Đồi núi,\
-Biển,\
-Rừng\n")
+    f.write(Comment.first.head())
   Comment.all.each do |comment|
-    # Comment.where("id < 10").each do |comment|
-      # puts comment.user_id
-      # puts comment.travel_id
-
-      tra = comment.travel
-      price_steps = [0, 0, 0, 0, 0,]
-      (tra.lower_price..tra.upper_price).each do |step|
-        price_steps[step - 1] = 1
-      end
-      # puts price_steps.to_s
-
-      typ = comment.travel.travel_types.map(&:type_id)
-      type_kinds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-      typ.each do |type_id|
-        type_kinds[type_id - 1] = 1
-      end
-      # puts type_kinds.to_s
-
-      f.write("\
-#{check(comment.user_id)},\
-#{check(comment.travel_id)},\
-#{check(comment.rating)},\
-#{price_steps[0]},\
-#{price_steps[1]},\
-#{price_steps[2]},\
-#{price_steps[3]},\
-#{price_steps[4]},\
-#{type_kinds[0]},\
-#{type_kinds[1]},\
-#{type_kinds[2]},\
-#{type_kinds[3]},\
-#{type_kinds[4]},\
-#{type_kinds[5]},\
-#{type_kinds[6]},\
-#{type_kinds[7]},\
-#{type_kinds[8]},\
-#{type_kinds[9]},\
-#{type_kinds[10]},\
-#{type_kinds[11]},\
-#{type_kinds[12]},\
-#{type_kinds[13]},\
-\n")
+    f.write(comment.beauty)
     print '.'
     end
   end
@@ -411,6 +346,13 @@ end
 
 
 
+
+
+
+if !Env.first
+  puts "Create enviroments"
+  Env.create(lock: 1, counts: 0)
+end
 
 
 if !User.first
@@ -447,9 +389,9 @@ update_rating_all_travels()
 #   build_random_comments((10 * rate).round())
 # end
 
-export_all_comments()
-Suggestion.all.delete_all
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+# export_all_comments()
+# Suggestion.all.delete_all
+# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
 build_suggestions()
 
