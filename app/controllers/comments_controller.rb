@@ -81,35 +81,35 @@ class CommentsController < ApplicationController
   end
 
   def update_suggestion(id)
-    puts '---------'
+    puts "---------- #{id} #{@@lock}"
     # @@mutex.synchronize do​​
-      @@id_comments += [id]
+    @@id_comments += [id]
+    return if @@lock
+    @@lock = true
 
-      return if @@lock
-      puts '----------++++++++++'
-      tmp_id_comments = @@id_comments
-      @@id_comments = []
-      @@lock = true
-      update_csv(tmp_id_comments)
-      # export_csv()
-      puts '----------++++++++++>>>>>>>>>>>'
-      system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
-      puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<'
-      puts @@id_comments
-      all_suggestions = get_all_suggestions()
-      puts tmp_id_comments
-      puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++'
-      tmp_id_comments.each do |user_id|
-        puts "----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++ #{user_id}"
+    puts "----------++++++++++ #{@@id_comments}"
+    tmp_id_comments = @@id_comments
+    @@id_comments = []
+    update_csv(tmp_id_comments)
+    # export_csv()
+    puts '----------++++++++++>>>>>>>>>>> '
+    system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+    puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<'
+    puts @@id_comments
+    all_suggestions = get_all_suggestions()
+    puts tmp_id_comments
+    puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++'
+    tmp_id_comments.each do |user_id|
+      puts "----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++ #{user_id}"
 
-        if all_suggestions[user_id] != nil
-          Suggestion.where(user_id: user_id).delete_all
-          all_suggestions[user_id][0..18].each do |suggestion|
-            Suggestion.create(user_id: user_id, travel_id: suggestion[0], rate: suggestion[1])
-          end
+      if all_suggestions[user_id] != nil
+        Suggestion.where(user_id: user_id).delete_all
+        all_suggestions[user_id][0..18].each do |suggestion|
+          Suggestion.create(user_id: user_id, travel_id: suggestion[0], rate: suggestion[1])
         end
       end
-      @@lock = false
+    end
+    @@lock = false
     # end​​
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++-----------'
   end
