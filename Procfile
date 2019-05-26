@@ -1,1 +1,1 @@
-server: rails server
+server: rails server -e development
