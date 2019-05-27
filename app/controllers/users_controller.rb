@@ -6,12 +6,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_create_params)
     render json: if !User.find_by(user_email_params).nil?
-                   { message: 'Conflict', status: 409 }
+                   {
+                     message: 'Conflict',
+                     status: 409
+                   }
                  elsif @user.save
                    {
                      message: 'Created',
-                     auth_token: @user.auth_token,
-                     id: @user.id, status: 201
+                     user: @user,
+                     status: 201
                    }
                  else
                    { message: @user.errors.full_messages, status: 404 }
