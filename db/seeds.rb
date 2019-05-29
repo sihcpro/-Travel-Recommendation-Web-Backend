@@ -383,17 +383,17 @@ if !FavoriteType.first
   build_favorite_types()
 end
 
-update_rating_all_travels()
+# update_rating_all_travels()
 
 # if !Comment.first
 #   build_random_comments((10 * rate).round())
 # end
 
-export_all_comments()
-Suggestion.all.delete_all
+# export_all_comments()
 system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-build_suggestions()
+# Suggestion.all.delete_all
+# build_suggestions()
 
 
 
