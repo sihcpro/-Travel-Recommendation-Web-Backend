@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_create_params)
     render json: if @comment.save
                    @comment.travel.update_rating
-                   Thread.new { update_suggestion(@comment.user_id) }
+                   Thread.new { update_suggestion(@comment.id) }
                    {
                      message: 'Create success',
                      status: 201
@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
     @comment = current_comment
     render json: if @comment
                    if @comment.update(update_comment_params)
-                     Thread.new { update_suggestion(@comment.user_id) }
+                     Thread.new { update_suggestion(@comment.id) }
                      {
                        comment: @comment,
                        message: 'Update comment success',
