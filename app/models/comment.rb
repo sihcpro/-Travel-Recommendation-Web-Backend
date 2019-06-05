@@ -8,6 +8,16 @@ class Comment < ApplicationRecord
 User,\
 Item,\
 Rating,\
+partner:1,\
+partner:2,\
+partner:3,\
+partner:4,\
+partner:5,\
+partner:6,\
+time:1,\
+time:2,\
+time:3,\
+time:4,\
 U Tâm linh,\
 U Di tích,\
 U Tham quan,\
@@ -21,35 +31,15 @@ U Đô thị,\
 U Nông thôn,\
 U Đồi núi,\
 U Biển,\
-U Rừng,\
-T Tâm linh,\
-T Di tích,\
-T Tham quan,\
-T Thắng cảnh,\
-T Ẩm thực,\
-T Giải trí,\
-T Nghỉ dưỡng,\
-T Mạo hiểm,\
-T Hồ sông suối,\
-T Đô thị,\
-T Nông thôn,\
-T Đồi núi,\
-T Biển,\
-T Rừng,\
-price:1,\
-price:2,\
-price:3,\
-price:4,\
-price:5\n"
+U Rừng\n"
   end
 
   def beauty
-    tra = self.travel
-    price_steps = [0, 0, 0, 0, 0,]
-    (tra.lower_price..tra.upper_price).each do |step|
-      price_steps[step - 1] = 1
-    end
-    # puts price_steps.to_s
+    partner = [0, 0, 0, 0, 0, 0,]
+    partner[self.partner - 1] = 1
+
+    time = [0, 0, 0, 0,]
+    time[self.time - 1] = 1
 
     type_users = FavoriteType.where("user_id": self.user_id).select(:type_id).map(&:type_id)
     # if type_users.length > 0
@@ -61,17 +51,20 @@ price:5\n"
     #   type_user_kinds = ['NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA',]
     # end
 
-    type_travels = TravelType.where("travel_id": self.travel_id).select("type_id").map(&:type_id)
-    type_travel_kinds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-    type_travels.each do |type_id|
-      type_travel_kinds[type_id - 1] = 1
-    end
-    # puts type_travel_kinds.to_s
-
     return "\
 #{check(self.user_id)},\
 #{check(self.travel_id)},\
 #{check(self.rating)},\
+#{partner[0]},\
+#{partner[1]},\
+#{partner[2]},\
+#{partner[3]},\
+#{partner[4]},\
+#{partner[5]},\
+#{time[0]},\
+#{time[1]},\
+#{time[2]},\
+#{time[3]},\
 #{type_user_kinds[0]},\
 #{type_user_kinds[1]},\
 #{type_user_kinds[2]},\
@@ -85,26 +78,7 @@ price:5\n"
 #{type_user_kinds[10]},\
 #{type_user_kinds[11]},\
 #{type_user_kinds[12]},\
-#{type_user_kinds[13]},\
-#{type_travel_kinds[0]},\
-#{type_travel_kinds[1]},\
-#{type_travel_kinds[2]},\
-#{type_travel_kinds[3]},\
-#{type_travel_kinds[4]},\
-#{type_travel_kinds[5]},\
-#{type_travel_kinds[6]},\
-#{type_travel_kinds[7]},\
-#{type_travel_kinds[8]},\
-#{type_travel_kinds[9]},\
-#{type_travel_kinds[10]},\
-#{type_travel_kinds[11]},\
-#{type_travel_kinds[12]},\
-#{type_travel_kinds[13]},\
-#{price_steps[0]},\
-#{price_steps[1]},\
-#{price_steps[2]},\
-#{price_steps[3]},\
-#{price_steps[4]}\n"
+#{type_user_kinds[13]}\n"
   end
 
   def check(str)

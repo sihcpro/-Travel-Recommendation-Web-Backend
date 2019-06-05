@@ -1,6 +1,6 @@
 class TravelCommentsController < ApplicationController
   def show
-    @comments = Comment.joins(:user).select('comments.*', 'users.username as username').where(travel_id: params[:id])
+    @comments = Comment.joins(:user).select('comments.*', 'users.username as username').where(travel_id: params[:id]).order('created_at DESC')
     render json: if @comments
                    {
                      comments: @comments,

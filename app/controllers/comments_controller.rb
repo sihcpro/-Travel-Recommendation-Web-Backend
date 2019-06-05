@@ -93,15 +93,16 @@ class CommentsController < ApplicationController
     update_csv(tmp_id_comments)
     # export_csv()
     puts '----------++++++++++>>>>>>>>>>> '
+    system("cp ./result.csv ./CARSKit.Workspace/train.csv")
     system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<'
     puts @@id_comments
     all_suggestions = get_all_suggestions()
     puts tmp_id_comments
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++'
-    tmp_id_comments.each do |user_id|
+    tmp_id_comments.each do |id|
+      user_id = Comment.find_by(id: id).user_id
       puts "----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++ #{user_id}"
-
       if all_suggestions[user_id] != nil
         Suggestion.where(user_id: user_id).delete_all
         all_suggestions[user_id][0..18].each do |suggestion|
