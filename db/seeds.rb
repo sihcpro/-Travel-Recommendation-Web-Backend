@@ -13,15 +13,22 @@ require 'csv'
 rate = 0.2
 
 def build_users(limit=500)
-  puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
+  puts 'Created Admin' if User.new(username: "Thanh Bằng", email: "equal@gmail.com",
                                    password: "123456", gender: 0, role: 0).save
   puts 'Created Test'  if User.new(username: "test", email: "test@gmail.com",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
+
   print 'Create user     : '
-  (1..limit).each do |n|
-    print '.' if User.new(username: "user#{n}", email: "user#{n}@b.c",
-                          password: "123456", gender: n%2, role: 2).save
+  users = CSV.read("./db/user_names.csv")
+  n = 0
+  for row in users
+    n+= 1
+    print '.' if User.new(username: row[0],
+                          email: "user#{n}@gmail.com",
+                          password: "123456",
+                          gender: n%2,
+                          role: 2).save
   end
   puts 'ok'
 end
@@ -288,6 +295,7 @@ end
 
 
 def build_comments
+  rd = Random.new(Time.now.to_i)
   comments = CSV.read("./db/Comment.csv")
   print 'Create comments : '
   line = 0
@@ -297,7 +305,10 @@ def build_comments
     print '.' if Comment.create(travel_id: row[0].to_i,
                                 user_id: row[1].to_i,
                                 rating: row[2].to_i,
-                                content: row[3],)
+                                content: row[3],
+                                partner: row[4],
+                                time: row[5],
+                                created_at: Time.now - rd.rand(1..365) * 60 * 60 * 24)
   end
   puts ' ok'
 end
@@ -383,17 +394,18 @@ if !FavoriteType.first
   build_favorite_types()
 end
 
-# update_rating_all_travels()
+update_rating_all_travels()
 
 # # if !Comment.first
 # #   build_random_comments((10 * rate).round())
 # # end
 
-# export_all_comments()
+export_all_comments()
+system("cp ./result.csv ./CARSKit.Workspace/train.csv")
 system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-# Suggestion.all.delete_all
-# build_suggestions()
+Suggestion.all.delete_all
+build_suggestions()
 
 
 
