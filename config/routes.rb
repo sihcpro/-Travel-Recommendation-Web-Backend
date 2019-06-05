@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :travel_type, only: %i[create destroy]
   # resource :history, only: :show
   resource :comment, only: %i[create show update destroy]
+  resource :schedule, only: %i[create show update destroy]
 
   resources :user_comments, only: :show
   resources :travel_comments, only: :show

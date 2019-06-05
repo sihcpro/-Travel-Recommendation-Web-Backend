@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :histories
   has_many :suggestions
   has_many :comments
+  has_many :schedules
 
   def generate_token(column)
     begin
