@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2019_05_29_105815) do
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "travel_id"
+    t.integer "partner"
+    t.integer "time"
     t.integer "rating"
     t.string "content"
     t.datetime "created_at", null: false

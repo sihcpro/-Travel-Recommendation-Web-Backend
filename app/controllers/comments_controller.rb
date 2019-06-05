@@ -69,7 +69,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_create_params
-    params.permit(:user_id, :travel_id, :content, :rating)
+    params.permit(:user_id, :travel_id, :content, :rating, :time, :partner)
   end
 
   def current_comment
@@ -77,7 +77,7 @@ class CommentsController < ApplicationController
   end
 
   def update_comment_params
-    params.permit(:rating, :content)
+    params.permit(:rating, :content, :partner, :time)
   end
 
   def update_suggestion(id)

@@ -385,9 +385,9 @@ end
 
 # update_rating_all_travels()
 
-# if !Comment.first
-#   build_random_comments((10 * rate).round())
-# end
+# # if !Comment.first
+# #   build_random_comments((10 * rate).round())
+# # end
 
 # export_all_comments()
 system("java -jar CARSKit-v0.3.5.jar -c setting.conf")

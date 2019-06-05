@@ -33,8 +33,8 @@ class SchedulesController < ApplicationController
     schedule_ids = update_schedule_params()
     update_status = true
     Schedule.transaction do
-      enumerate(schedule_ids).each do |order, id|
-        status = Schedule.find_by(id: id).update(order: order)
+      schedule_ids.each_with_index do |id, order|
+        status = Schedule.find_by(id: id).update(order: order + 1)
       end
     end
     render json: if update_status
@@ -55,6 +55,7 @@ class SchedulesController < ApplicationController
     render json: if schedule
                    if schedule.delete
                      {
+                       schedule: schedule,
                        message: 'Success',
                        status: 200
                      }
