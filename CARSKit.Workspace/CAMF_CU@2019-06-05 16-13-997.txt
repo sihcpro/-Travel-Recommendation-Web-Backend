@@ -1,0 +1,95 @@
+WorkingPath: ./CARSKit.Workspace/
+Your original rating data path: ./result.csv
+Current working path: ./CARSKit.Workspace/
+DataPath: ./CARSKit.Workspace/train.csv
+Rating data set has been successfully loaded.
+
+/************************************************************************************************************************************************************************************************************************************************************
+ *
+ * Dataset: ./CARSKit.Workspace/train.csv
+ * 
+ * Statistics of U-I-C Matrix:
+ * User amount: 98
+ * Item amount: 53
+ * Rate amount: 1461
+ * Context dimensions: 16 (partner, time, U Tâm linh, U Di tích, U Tham quan, U Thắng cảnh, U Ẩm thực, U Giải trí, U Nghỉ dưỡng, U Mạo hiểm, U Hồ sông suối, U Đô thị, U Nông thôn, U Đồi núi, U Biển, U Rừng)
+ * Context conditions: 24 (partner: 6, time: 4, U Tâm linh: 1, U Di tích: 1, U Tham quan: 1, U Thắng cảnh: 1, U Ẩm thực: 1, U Giải trí: 1, U Nghỉ dưỡng: 1, U Mạo hiểm: 1, U Hồ sông suối: 1, U Đô thị: 1, U Nông thôn: 1, U Đồi núi: 1, U Biển: 1, U Rừng: 1)
+ * Context situations: 1014
+ * Data density: 1.1720%
+ * Scale distribution: [4.0 x 360, 2.0 x 209, 1.0 x 14, 5.0 x 484, 3.0 x 394]
+ * Average value of all ratings: 3.746749
+ * Standard deviation of all ratings: 1.093286
+ * Mode of all rating values: 5.000000
+ * Median of all rating values: 4.000000
+ * 
+ * Distribution of rate counts per user: mean = 14.908163265306122, median = 15.0, sd = 6.040824944836655
+ * Distribution of rate counts per item: mean = 27.566037735849058, median = 26.0, sd = 8.8285758888391
+ * Distribution of rate counts per context condition: mean = 372.75, median = 381.5, sd = 85.19010603741884
+ * 
+ * Average rating in each context condition: (Average, Counts)
+ * partner:1 - 3.797665, 257
+ * partner:2 - 3.802521, 238
+ * partner:3 - 3.700787, 254
+ * partner:4 - 3.707819, 243
+ * partner:5 - 3.714894, 235
+ * partner:6 - 3.756410, 234
+ * time:1 - 3.813333, 375
+ * time:2 - 3.668555, 353
+ * time:3 - 3.836898, 374
+ * time:4 - 3.660167, 359
+ * U Tâm linh - 3.747845, 464
+ * U Di tích - 3.823834, 386
+ * U Tham quan - 3.735149, 404
+ * U Thắng cảnh - 3.767184, 451
+ * U Ẩm thực - 3.778281, 442
+ * U Giải trí - 3.729443, 377
+ * U Nghỉ dưỡng - 3.728477, 453
+ * U Mạo hiểm - 3.776680, 506
+ * U Hồ sông suối - 3.791480, 446
+ * U Đô thị - 3.757238, 449
+ * U Nông thôn - 3.711538, 416
+ * U Đồi núi - 3.677033, 418
+ * U Biển - 3.718750, 480
+ * U Rừng - 3.746988, 332
+ * 
+ * Statistics of UI Matrix:
+ * User amount: 98
+ * Item amount: 53
+ * Rate amount: 1461.0
+ * Data density: 28.1286%
+ * Data density (unique pairs): 0.0000%
+ * Average value of all ratings: 3.746749
+ * Standard deviation of all ratings: 1.093286
+ * Mode of all rating values: 5.000000
+ * Median of all rating values: 4.000000
+ * Distribution of rate counts per UI pair: mean = 1.0, median = 1.0, sd = 0.0
+ * 
+ * Statistics of UC Matrix:
+ * User amount: 98
+ * Condition amount: 24
+ * Rate amount: 1322.0
+ * Data density: 56.2075%
+ * Data density (unique pairs): 85.4766%
+ * Average value of all ratings: 3.730104
+ * Standard deviation of all ratings: 0.636490
+ * Mode of all rating values: 4.000000
+ * Median of all rating values: 3.761905
+ * Distribution of rate counts per UC pair: mean = 6.7670196671709535, median = 4.0, sd = 6.4040835389534525
+ * 
+ * Statistics of IC Matrix:
+ * Item amount: 53
+ * Condition amount: 24
+ * Rate amount: 1263.0
+ * Data density: 99.2925%
+ * Data density (unique pairs): 97.7039%
+ * Average value of all ratings: 3.753780
+ * Standard deviation of all ratings: 0.489714
+ * Mode of all rating values: 4.000000
+ * Median of all rating values: 3.750000
+ * Distribution of rate counts per IC pair: mean = 7.0831353919239906, median = 7.0, sd = 3.510674907858634
+ * 
+ * Paired t-test on user's average rating between UI and UC matrix: absolute mean diff = 0.00476557393476984, p-value = 0.4955417902680379
+ * Paired t-test on item's average rating between UI and IC matrix: absolute mean diff = 0.007747303235741576, p-value = 0.4748331340035902
+ *
+ ************************************************************************************************************************************************************************************************************************************************************/
+Final Results by CAMF_CU, Pre5: 0.019154,Pre10: 0.017572, Pre1000: 0.001058, Rec5: 0.088507, Rec10: 0.163854, Rec1000: 1.000000, AUC5: 0.499793, AUC10: 0.506086, AUC1000: 0.482220, MAP5: 0.042183, MAP10: 0.052299, MAP1000: 0.084636, NDCG5: 0.054683, NDCG10: 0.079337,NDCG1000: 0.253819,MRR5: 0.046523, MRR10: 0.056904,MRR1000: 0.088268, numFactors: 10, numIter: 1000, lrate: 0.02, maxlrate: -1.0, regB: 1.0E-4, regU: 1.0E-4, regI: 1.0E-4, regC: 0.001, isBoldDriver: true, Time: '00:01','00:00'
