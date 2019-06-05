@@ -15,7 +15,7 @@ rate = 0.2
 def build_users(limit=500)
   puts 'Created Admin' if User.new(username: "Bang", email: "equal@gmail.com",
                                    password: "123456", gender: 0, role: 0).save
-  puts 'Created Test'  if User.new(username: "test", email: "test",
+  puts 'Created Test'  if User.new(username: "test", email: "test@gmail.com",
                                    password: "123456", gender: 0, role: 1).save
   puts 'Default password: 123456'
   print 'Create user     : '
@@ -212,56 +212,54 @@ def classify_price(price)
   end
 end
 
-def build_suggestions
-  # suggestions = 
-  puts 'Create suggestion: '
-
+def get_all_suggestions
+  all_suggestions = {}
   (1..5).each do |i|
     line_number = 0
-    print "-> #{i} : "
     File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [#{i}].txt").each do |line|
       line_number += 1
       next if line_number == 1
       user_id = line.match(/[\d]+/).to_s.to_i
-      favorites = line.scan(/[\w ]+:[\w ]+;/u)
+
       suggestions = line.scan(/\([^\(]+\)/)
-      # puts user_id
-      # puts favorites
-      # puts suggestions
+      suggestions.each do |item|
+        travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
+        rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
 
-      favorite_map = {}
-      favorites.each do |item|
-        title = item.match(/[\w ]+:/u).to_s.chomp(":")
-        value = item.match(/[\w ]+;/u).to_s.chomp(";")
-        favorite_map[title] = value
-      end
-      if !Suggestion.find_by(user_id: user_id)
-        # favorite = Favorite.new(user_id: user_id, price: favorite_map['price'],
-        #                         date: favorite_map['date'],
-        #                         duration: favorite_map['duration'].to_s.to_i)
-        # print '>' if favorite.save()
-        # puts favorite.inspect
-
-        suggestions.each do |item|
-          travel_id = item.match(/[\d]+,/).to_s.chomp(":").to_i
-          rate = item.match(/[\d]+.[\d]+\)/).to_s.chomp(":").to_f
-
-          suggestion = Suggestion.new(user_id: user_id, travel_id: travel_id,
-                                      rate: rate)
-
-          print '.' if suggestion.save()
-          # break
+        # puts 1
+        # puts user_id
+        # puts all_suggestions[user_id]
+        if all_suggestions[user_id] == nil
+          # puts 2
+          all_suggestions[user_id] = [[travel_id, rate]]
+        else
+          # puts 3
+          all_suggestions[user_id] += [[travel_id, rate]]
         end
       end
-      print '>'
     end
-    puts ' ok'
+  end
+  all_suggestions
+end
+
+def build_suggestions
+  all_suggestions = get_all_suggestions()
+  puts 'Create suggestion: '
+
+  all_suggestions.each do |user_id, user_suggestions|
+    print user_id
+    user_suggestions[0..18].each do |suggestion|
+      print '.' if Suggestion.create(user_id: user_id,
+                                     travel_id: suggestion[0],
+                                     rate: suggestion[1])
+    end
+    print '> '
   end
   puts 'Suggestion done'
 end
 
 
-def build_travel_manual()
+def build_travel_manual
   locations = CSV.read("./db/location_sheet.csv")
   print 'Create locations: '
   for row in locations
@@ -328,8 +326,33 @@ def update_rating_all_travels
   puts '>'
 end
 
+def export_all_comments
+  print 'Export result   : '
+  File.open('result.csv', 'w+') do |f|
+    f.write(Comment.first.head())
+  Comment.all.each do |comment|
+    f.write(comment.beauty)
+    print '.'
+    end
+  end
+  puts '>'
+end
+
+def check(str)
+  str || 'NA'
+end
 
 
+
+
+
+
+
+
+if !Env.first
+  puts "Create enviroments"
+  Env.create(lock: 1, counts: 0)
+end
 
 
 if !User.first
@@ -360,15 +383,17 @@ if !FavoriteType.first
   build_favorite_types()
 end
 
-update_rating_all_travels()
+# update_rating_all_travels()
 
-# if !Comment.first
-#   build_random_comments((10 * rate).round())
-# end
+# # if !Comment.first
+# #   build_random_comments((10 * rate).round())
+# # end
 
-# system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+# export_all_comments()
+system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
 
-build_suggestions()
+# Suggestion.all.delete_all
+# build_suggestions()
 
 
 
