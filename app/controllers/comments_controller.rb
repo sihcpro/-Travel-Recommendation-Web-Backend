@@ -93,7 +93,6 @@ class CommentsController < ApplicationController
     update_csv(tmp_id_comments)
     # export_csv()
     puts '----------++++++++++>>>>>>>>>>> '
-    system("cp ./result.csv ./CARSKit.Workspace/train.csv")
     system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<'
     puts @@id_comments
