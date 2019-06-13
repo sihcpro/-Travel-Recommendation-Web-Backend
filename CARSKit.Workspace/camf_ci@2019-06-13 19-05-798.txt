@@ -1,0 +1,86 @@
+WorkingPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+Your original rating data path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/result.csv
+Current working path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+User, Item, Rating, partner:6, partner:4, partner:5, partner:2, partner:3, partner:1, time:4, time:2, time:3, time:1
+Data transformaton completed (from Compact to Binary format). See new rating file: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Dataset: ...Backend/CARSKit.Workspace/train.csv
+DataPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Rating data set has been successfully loaded.
+
+/*******************************************************************************************
+ *
+ * Dataset: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+ * 
+ * Statistics of U-I-C Matrix:
+ * User amount: 12
+ * Item amount: 30
+ * Rate amount: 2873
+ * Context dimensions: 2 (partner, time)
+ * Context conditions: 10 (partner: 6, time: 4)
+ * Context situations: 24
+ * Context cdims: 24
+ * Data density: 31.1574%
+ * Scale distribution: [4.0 x 1084, 2.0 x 21, 5.0 x 1184, 3.0 x 584]
+ * Average value of all ratings: 4.208395
+ * Standard deviation of all ratings: 0.778159
+ * Mode of all rating values: 5.000000
+ * Median of all rating values: 4.000000
+ *
+ *******************************************************************************************/
+With Setup: cv -k 5 -p on --rand-seed 1 --test-view all
+item: 0 | 27
+item: 1 | 29
+item: 2 | 3
+item: 3 | 15
+item: 4 | 7
+item: 5 | 9
+item: 6 | 20
+item: 7 | 11
+item: 8 | 6
+item: 9 | 17
+item: 10 | 10
+item: 11 | 1
+item: 12 | 16
+item: 13 | 30
+item: 14 | 24
+item: 15 | 13
+item: 16 | 12
+item: 17 | 22
+item: 18 | 8
+item: 19 | 18
+item: 20 | 19
+item: 21 | 23
+item: 22 | 2
+item: 23 | 26
+item: 24 | 28
+item: 25 | 5
+item: 26 | 21
+item: 27 | 25
+item: 28 | 14
+item: 29 | 4
+context: 0 | 5,6 | partner:1;time:4
+context: 1 | 2,7 | partner:5;time:2
+context: 2 | 3,9 | partner:2;time:1
+context: 3 | 2,8 | partner:5;time:3
+context: 4 | 5,7 | partner:1;time:2
+context: 5 | 5,8 | partner:1;time:3
+context: 6 | 0,7 | partner:6;time:2
+context: 7 | 3,8 | partner:2;time:3
+context: 8 | 1,8 | partner:4;time:3
+context: 9 | 1,6 | partner:4;time:4
+context: 10 | 2,6 | partner:5;time:4
+context: 11 | 1,7 | partner:4;time:2
+context: 12 | 3,7 | partner:2;time:2
+context: 13 | 1,9 | partner:4;time:1
+context: 14 | 2,9 | partner:5;time:1
+context: 15 | 0,6 | partner:6;time:4
+context: 16 | 4,9 | partner:3;time:1
+context: 17 | 5,9 | partner:1;time:1
+context: 18 | 0,8 | partner:6;time:3
+context: 19 | 3,6 | partner:2;time:4
+context: 20 | 0,9 | partner:6;time:1
+context: 21 | 4,7 | partner:3;time:2
+context: 22 | 4,8 | partner:3;time:3
+context: 23 | 4,6 | partner:3;time:4
+Final Results by CAMF_CI, Pre5: 0.102078,Pre10: 0.098955, Rec5: 0.237431, Rec10: 0.459766, AUC5: 0.626806, AUC10: 0.674426, MAP5: 0.114238, MAP10: 0.153920,NDCG5: 0.171400, NDCG10: 0.258904,MRR5: 0.209626, MRR10: 0.244042, numFactors: 8, numIter: 500, lrate: 0.03, maxlrate: -1.0, regB: 1.0E-5, regU: 1.0E-4, regI: 1.0E-5, regC: 1.0E-5, isBoldDriver: true, Time: '00:01','00:00'
+

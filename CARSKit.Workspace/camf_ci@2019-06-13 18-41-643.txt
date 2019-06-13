@@ -1,0 +1,39 @@
+WorkingPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+Your original rating data path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/result.csv
+Current working path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+User, Item, Rating, partner:1, time:1, time:3
+Data transformaton completed (from Compact to Binary format). See new rating file: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Dataset: ...Backend/CARSKit.Workspace/train.csv
+DataPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Rating data set has been successfully loaded.
+
+/*******************************************************************************************
+ *
+ * Dataset: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+ * 
+ * Statistics of U-I-C Matrix:
+ * User amount: 6
+ * Item amount: 5
+ * Rate amount: 23
+ * Context dimensions: 2 (partner, time)
+ * Context conditions: 3 (partner: 1, time: 2)
+ * Context situations: 2
+ * Context cdims: 2
+ * Data density: 38.3333%
+ * Scale distribution: [1.0 x 4, 4.0 x 7, 2.0 x 3, 5.0 x 7, 3.0 x 2]
+ * Average value of all ratings: 3.434783
+ * Standard deviation of all ratings: 1.469282
+ * Mode of all rating values: 4.000000
+ * Median of all rating values: 4.000000
+ *
+ *******************************************************************************************/
+With Setup: cv -k 5 -p on --rand-seed 1 --test-view all
+item: 0 | 3
+item: 1 | 1
+item: 2 | 2
+item: 3 | 5
+item: 4 | 4
+context: 0 | 0,1 | partner:1;time:1
+context: 1 | 0,2 | partner:1;time:3
+Final Results by CAMF_CI, Pre5: 0.220000,Pre10: 0.110000, Rec5: 1.000000, Rec10: 1.000000, AUC5: 0.552500, AUC10: 0.552500, MAP5: 0.743333, MAP10: 0.743333,NDCG5: 0.813285, NDCG10: 0.813285,MRR5: 0.751667, MRR10: 0.751667, numFactors: 8, numIter: 500, lrate: 0.03, maxlrate: -1.0, regB: 1.0E-5, regU: 1.0E-4, regI: 1.0E-5, regC: 1.0E-5, isBoldDriver: true, Time: '00:00','00:00'
+

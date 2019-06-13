@@ -24,6 +24,7 @@ def build_users(limit=500)
   n = 0
   for row in users
     n+= 1
+    break if n > limit
     print '.' if User.new(username: row[0],
                           email: "user#{n}@gmail.com",
                           password: "123456",
@@ -106,124 +107,12 @@ def build_tours()
   puts ' ok'
 end
 
-def get_random_comments()
-  random_comments = CSV.read("./db/comments.csv")
-  random_comments.map{|i| i[1] = i[1].to_i()}
-end
-
-
-def build_random_comments(size=10)
-  rd = Random.new(Time.now.to_i)
-
-  random_comments = get_random_comments()
-  destinations = Destination.select('city_id').all.distinct.map{|i| i.city_id}
-  prices = ['expensive', 'reasonable', 'cheap']
-  types = Type.all
-  durations = Travel.select('duration').all.distinct.map{|i| i.duration}
-  all_user = User.all
-
-  # user = User.first
-  puts destinations.size, prices.size, types.size, durations.size, all_user.size, random_comments.size
-  print('Create comments: ')
-
-  all_user.each do |user|
-    amount_of_travel = rd.rand(1..[1,size].max)
-    rd_a =   [rd.rand(1..5), rd.rand(1..5), rd.rand(1..5), rd.rand(1..5)]
-    bool_a = [rd_a[0] > 1  , rd_a[1] > 2  , rd_a[2] > 3  , rd_a[3] > 4  ]
-    #         starts       , prices       , types         , duration
-    user_characteristics = {
-      'destination': bool_a[0],
-      'price': bool_a[1],
-      'type': bool_a[2],
-      'duration': bool_a[3]
-    }
-    dict_size_of_travel = {}
-
-    # puts random_comments.size
-
-    destination = destinations[rd.rand(0..(destinations.size-1))]
-    type  = types[rd.rand(0..(types.size-1))]
-    price = prices[rd.rand(0..(prices.size-1))]
-    duration = durations[rd.rand(0..(durations.size-1))]
-
-    cnt = 0
-    while(cnt < amount_of_travel)
-      # cnt = 100000
-      if !user_characteristics['destination']
-        destination = destinations[rd.rand(0..(destinations.size-1))]
-      end
-
-      comment = random_comments[rd.rand(0..(random_comments.size-1))]
-
-      # using dict to save reues value
-      # if !dict_size_of_travel[destination]
-      #   dict_size_of_travel[destination] = City.find_by(id: destination).travel.size
-      # end
-
-      if user_characteristics['type']
-
-        if user_characteristics['duration']
-          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travel_types.type_id" => type, "travels.duration" => duration).select("destinations.travel_id")
-          (1..3).each do |i|
-            travel = travels[rd.rand(0..(travels.size-1))]
-            if !user_characteristics['price'] || 
-              (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
-            end
-          end
-        else
-          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travel_types.type_id" => type).select("destinations.travel_id")
-          (1..3).each do |i|
-            travel = travels[rd.rand(0..(travels.size-1))]
-            if !user_characteristics['price'] || 
-              (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
-            end
-          end
-        end
-      else
-        if user_characteristics['duration']
-          travels = Destination.joins(:travel => :travel_type).where(city_id: destination, "travels.duration" => duration).select("destinations.travel_id")
-          next if !travels
-          (1..3).each do |i|
-            travel = travels[rd.rand(0..(travels.size-1))]
-            if !user_characteristics['price'] || 
-              (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
-            end
-          end
-        else
-          travels = Destination.where(city_id: destination).select("destinations.travel_id")
-          (1..3).each do |i|
-            travel = travels[rd.rand(0..(travels.size-1))]
-            if !user_characteristics['price'] || 
-              (user_characteristics['price'] && classify_price(travel.price) == price)
-              cnt += 1 if Comment.create(user_id: user.id, travel_id: travel.travel_id, rating: comment[1], content: comment[0])
-            end
-          end
-        end
-      end
-    end
-    print('.')
-  end
-  puts ' ok'
-end
-
-def classify_price(price)
-  if price > 10000000
-    return 'expensive'
-  elsif price > 5000000
-    return 'reasonable'
-  else
-    return 'cheap'
-  end
-end
-
 def get_all_suggestions
+  # Read suggestion from 5 file
   all_suggestions = {}
   (1..5).each do |i|
     line_number = 0
-    File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [#{i}].txt").each do |line|
+    File.readlines("./CARSKit.Workspace/CAMF_CI-top-10-items fold [#{i}].txt").each do |line|
       line_number += 1
       next if line_number == 1
       user_id = line.match(/[\d]+/).to_s.to_i
@@ -246,30 +135,64 @@ def get_all_suggestions
       end
     end
   end
+
+  # Distinct and sort
+  all_suggestions.each do |key, suggestions|
+    tmp_suggestions_dict = {}
+    # Get hightest rating for a travel that repeated
+    all_suggestions[key].each_with_index do |suggestion, i|
+      if tmp_suggestions_dict[suggestion[0]] == nil
+        tmp_suggestions_dict[suggestion[0]] = suggestion
+      elsif tmp_suggestions_dict[suggestion[0]][1] < suggestion[1]
+        tmp_suggestions_dict[suggestion[0]] = suggestion
+      end
+    end
+
+    # Dict to array
+    tmp_suggestions_arr = []
+    tmp_suggestions_dict.each do |key, suggestion|
+      tmp_suggestions_arr += [suggestion]
+    end
+
+    # Sort
+    all_suggestions[key] = tmp_suggestions_arr.sort_by{ |a| [ a[1] ] }.reverse
+  end
   all_suggestions
 end
 
 def build_suggestions
-  all_suggestions = get_all_suggestions()
-  puts 'Create suggestion: '
-
-  all_suggestions.each do |user_id, user_suggestions|
-    print user_id
-    user_suggestions[0..18].each do |suggestion|
-      print '.' if Suggestion.create(user_id: user_id,
-                                     travel_id: suggestion[0],
-                                     rate: suggestion[1])
+  users = User.all.select(:id).map(&:id)
+  users.each do |user_id|
+    print "#{user_id}>"
+    system("java -jar Recommender.jar -c setting.conf -u #{user_id}")
+    travels = []
+    File.open("CARSKit.Workspace/user#{user_id}_suggestion.txt", 'r') do |f|
+      travel_all = f.read().split("\n")
+      puts travel_all.to_s
+      travel_all.each do |travel|
+        travel = travel.split(',')
+        travels = travels + [[travel[0].to_i, travel[1].to_f]]
+      end
+      travels = travels.sort_by{ |a| [ a[1] ] }.reverse
     end
-    print '> '
+    puts travels.to_s
+    travels[0..9].each_with_index do |travel, idx|
+      print '.' if Suggestion.create(user_id: user_id,
+                                     travel_id: travel[0],
+                                     rate: travel[1])
+    end
+    print '< '
   end
-  puts 'Suggestion done'
 end
 
 
-def build_travel_manual
+def build_travel_manual(limit = 100)
   locations = CSV.read("./db/location_sheet.csv")
   print 'Create locations: '
+  cnt = 0
   for row in locations
+    cnt += 1
+    break if cnt > limit
     travel = Travel.new(title: row[0],
                         lower_price: row[1].to_i,
                         upper_price: row[2].to_i,
@@ -296,18 +219,18 @@ end
 
 def build_comments
   rd = Random.new(Time.now.to_i)
-  comments = CSV.read("./db/Comment.csv")
+  comments = CSV.read("./db/comment_sheet.csv")
   print 'Create comments : '
   line = 0
   for row in comments
     line += 1
     next if line == 1
-    print '.' if Comment.create(travel_id: row[0].to_i,
-                                user_id: row[1].to_i,
+    print '.' if Comment.create(user_id: row[0].to_i,
+                                travel_id: row[1].to_i,
                                 rating: row[2].to_i,
-                                content: row[3],
-                                partner: row[4],
-                                time: row[5],
+                                content: "",
+                                partner: row[3],
+                                time: row[4],
                                 created_at: Time.now - rd.rand(1..365) * 60 * 60 * 24)
   end
   puts ' ok'
@@ -332,18 +255,26 @@ end
 def update_rating_all_travels
   print 'Update rating   : '
   Travel.all.each do |travel|
-    print '.' if travel.update_rating
+    if travel && travel.comments.count > 0
+      if travel.update_rating
+        print '.'
+      else
+        print '!'
+      end
+    else
+      print '?'
+    end
   end
-  puts '>'
+  puts ' ok'
 end
 
 def export_all_comments
   print 'Export result   : '
   File.open('result.csv', 'w+') do |f|
     f.write(Comment.first.head())
-  Comment.all.each do |comment|
-    f.write(comment.beauty)
-    print '.'
+    Comment.all.each do |comment|
+      f.write(comment.beauty)
+      print '.'
     end
   end
   puts '>'
@@ -367,7 +298,7 @@ end
 
 
 if !User.first
-  build_users((1000 * rate).round())
+  build_users(10)
 end
 
 if !City.first
@@ -383,7 +314,7 @@ if !PriceStep.first
 end
 
 if !Travel.first
-  build_travel_manual()
+  build_travel_manual(30)
 end
 
 if !Comment.first
@@ -396,13 +327,8 @@ end
 
 update_rating_all_travels()
 
-# # if !Comment.first
-# #   build_random_comments((10 * rate).round())
-# # end
-
 export_all_comments()
-system("cp ./result.csv ./CARSKit.Workspace/train.csv")
-system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+system("java -jar BuildModel.jar -c setting.conf")
 
 Suggestion.all.delete_all
 build_suggestions()

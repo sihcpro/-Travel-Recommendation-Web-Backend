@@ -93,21 +93,30 @@ class CommentsController < ApplicationController
     update_csv(tmp_id_comments)
     # export_csv()
     puts '----------++++++++++>>>>>>>>>>> '
-    system("cp ./result.csv ./CARSKit.Workspace/train.csv")
-    system("java -jar CARSKit-v0.3.5.jar -c setting.conf")
+    system("java -jar BuildModel.jar -c setting.conf")
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<'
-    puts @@id_comments
-    all_suggestions = get_all_suggestions()
     puts tmp_id_comments
     puts '----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++'
     tmp_id_comments.each do |id|
       user_id = Comment.find_by(id: id).user_id
+      system("java -jar Recommender.jar -c setting.conf -u #{user_id}")
       puts "----------++++++++++>>>>>>>>>>><<<<<<<<<<+++++++++++ #{user_id}"
-      if all_suggestions[user_id] != nil
-        Suggestion.where(user_id: user_id).delete_all
-        all_suggestions[user_id][0..18].each do |suggestion|
-          Suggestion.create(user_id: user_id, travel_id: suggestion[0], rate: suggestion[1])
+      travels = []
+      File.open("CARSKit.Workspace/user#{user_id}_suggestion.txt", 'r') do |f|
+        travel_all = f.read().split("\n")
+        puts travel_all.to_s
+        travel_all.each do |travel|
+          travel = travel.split(',')
+          travels = travels + [[travel[0].to_i, travel[1].to_f]]
         end
+        travels = travels.sort_by{ |a| [ a[1] ] }.reverse
+      end
+      puts travels.to_s
+      Suggestion.where(user_id: user_id).delete_all
+      travels[0..9].each_with_index do |travel, idx|
+        print '.' if Suggestion.create(user_id: user_id,
+                                       travel_id: travel[0],
+                                       rate: trave[1])
       end
     end
     @@lock = false

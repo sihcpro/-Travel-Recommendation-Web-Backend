@@ -3,7 +3,7 @@ module CommentsHelper
     all_suggestions = {}
     (1..5).each do |i|
       line_number = 0
-      File.readlines("./CARSKit.Workspace/CAMF_CU-top-1000-items fold [#{i}].txt").each do |line|
+      File.readlines("./CARSKit.Workspace/CAMF_CI-top-10-items fold [#{i}].txt").each do |line|
         line_number += 1
         next if line_number == 1
         user_id = line.match(/[\d]+/).to_s.to_i
