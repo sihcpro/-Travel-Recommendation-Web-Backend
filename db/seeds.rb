@@ -24,6 +24,7 @@ def build_users(limit=500)
   n = 0
   for row in users
     n+= 1
+    break if n > limit
     print '.' if User.new(username: row[0],
                           email: "user#{n}@gmail.com",
                           password: "123456",
@@ -160,26 +161,38 @@ def get_all_suggestions
 end
 
 def build_suggestions
-  all_suggestions = get_all_suggestions()
-  puts 'Create suggestion: '
-
-  all_suggestions.each do |user_id, user_suggestions|
-    print user_id
-    user_suggestions[0..18].each do |suggestion|
-      print '.' if Suggestion.create(user_id: user_id,
-                                     travel_id: suggestion[0],
-                                     rate: suggestion[1])
+  users = User.all.select(:id).map(&:id)
+  users.each do |user_id|
+    print "#{user_id}>"
+    system("java -jar Recommender.jar -c setting.conf -u #{user_id}")
+    travels = []
+    File.open("CARSKit.Workspace/user#{user_id}_suggestion.txt", 'r') do |f|
+      travel_all = f.read().split("\n")
+      puts travel_all.to_s
+      travel_all.each do |travel|
+        travel = travel.split(',')
+        travels = travels + [[travel[0].to_i, travel[1].to_f]]
+      end
+      travels = travels.sort_by{ |a| [ a[1] ] }.reverse
     end
-    print '> '
+    puts travels.to_s
+    travels[0..9].each_with_index do |travel, idx|
+      print '.' if Suggestion.create(user_id: user_id,
+                                     travel_id: travel[0],
+                                     rate: travel[1])
+    end
+    print '< '
   end
-  puts 'Suggestion done'
 end
 
 
-def build_travel_manual
+def build_travel_manual(limit = 100)
   locations = CSV.read("./db/location_sheet.csv")
   print 'Create locations: '
+  cnt = 0
   for row in locations
+    cnt += 1
+    break if cnt > limit
     travel = Travel.new(title: row[0],
                         lower_price: row[1].to_i,
                         upper_price: row[2].to_i,
@@ -206,18 +219,18 @@ end
 
 def build_comments
   rd = Random.new(Time.now.to_i)
-  comments = CSV.read("./db/Comment.csv")
+  comments = CSV.read("./db/comment_sheet.csv")
   print 'Create comments : '
   line = 0
   for row in comments
     line += 1
     next if line == 1
-    print '.' if Comment.create(travel_id: row[0].to_i,
-                                user_id: row[1].to_i,
+    print '.' if Comment.create(user_id: row[0].to_i,
+                                travel_id: row[1].to_i,
                                 rating: row[2].to_i,
-                                content: row[3],
-                                partner: row[4],
-                                time: row[5],
+                                content: "",
+                                partner: row[3],
+                                time: row[4],
                                 created_at: Time.now - rd.rand(1..365) * 60 * 60 * 24)
   end
   puts ' ok'
@@ -242,9 +255,17 @@ end
 def update_rating_all_travels
   print 'Update rating   : '
   Travel.all.each do |travel|
-    print '.' if travel.update_rating
+    if travel && travel.comments.count > 0
+      if travel.update_rating
+        print '.'
+      else
+        print '!'
+      end
+    else
+      print '?'
+    end
   end
-  puts '>'
+  puts ' ok'
 end
 
 def export_all_comments
@@ -277,7 +298,7 @@ end
 
 
 if !User.first
-  build_users((1000 * rate).round())
+  build_users(10)
 end
 
 if !City.first
@@ -293,7 +314,7 @@ if !PriceStep.first
 end
 
 if !Travel.first
-  build_travel_manual()
+  build_travel_manual(30)
 end
 
 if !Comment.first
@@ -304,13 +325,13 @@ if !FavoriteType.first
   build_favorite_types()
 end
 
-# update_rating_all_travels()
+update_rating_all_travels()
 
-# export_all_comments()
+export_all_comments()
 system("java -jar BuildModel.jar -c setting.conf")
 
-# Suggestion.all.delete_all
-# build_suggestions()
+Suggestion.all.delete_all
+build_suggestions()
 
 
 

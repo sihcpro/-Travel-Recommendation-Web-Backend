@@ -1,0 +1,45 @@
+WorkingPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+Your original rating data path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/result.csv
+Current working path: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/
+User, Item, Rating, partner:4, partner:3, time:3, time:1
+Data transformaton completed (from Compact to Binary format). See new rating file: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Dataset: ...Backend/CARSKit.Workspace/train.csv
+DataPath: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+Rating data set has been successfully loaded.
+
+/*******************************************************************************************
+ *
+ * Dataset: /Users/sihc/Project/Travel-Recommendation-Web-Backend/CARSKit.Workspace/train.csv
+ * 
+ * Statistics of U-I-C Matrix:
+ * User amount: 10
+ * Item amount: 10
+ * Rate amount: 35
+ * Context dimensions: 2 (partner, time)
+ * Context conditions: 4 (partner: 2, time: 2)
+ * Context situations: 3
+ * Context cdims: 4
+ * Data density: 8.7500%
+ * Scale distribution: [4.0 x 16, 2.0 x 3, 1.0, 5.0 x 14, 3.0]
+ * Average value of all ratings: 4.114286
+ * Standard deviation of all ratings: 1.007725
+ * Mode of all rating values: 4.000000
+ * Median of all rating values: 4.000000
+ *
+ *******************************************************************************************/
+With Setup: cv -k 5 -p on --rand-seed 1 --test-view all
+item: 0 | 4
+item: 1 | 3
+item: 2 | 7
+item: 3 | 10
+item: 4 | 5
+item: 5 | 8
+item: 6 | 1
+item: 7 | 6
+item: 8 | 9
+item: 9 | 2
+context: 0 | 0,3 | partner:4;time:1
+context: 1 | 1,2 | partner:3;time:3
+context: 2 | 0,2 | partner:4;time:3
+Final Results by CAMF_CI, Pre5: 0.108000,Pre10: 0.110667, Rec5: 0.486667, Rec10: 1.000000, AUC5: 0.575278, AUC10: 0.482844, MAP5: 0.287222, MAP10: 0.360294,NDCG5: 0.339841, NDCG10: 0.510113,MRR5: 0.291111, MRR10: 0.358230, numFactors: 15, numIter: 500, lrate: 0.02, maxlrate: -1.0, regB: 1.0E-4, regU: 0.001, regI: 1.0E-4, regC: 1.0E-4, isBoldDriver: true, Time: '00:00','00:00'
+
